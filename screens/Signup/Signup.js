@@ -50,122 +50,118 @@ export default Signup = ({ navigation }) => {
   return (
     <TouchableWithoutFeedback onPress={() => Keyboard.dismiss()}>
       <View style={styles.container}>
-        <NavHeader navigation={navigation} />
-        <View style={styles.wrapper}>
-          <View>
-            <Text style={styles.headerText}>لنبدا</Text>
-          </View>
-          <Formik
-            style={styles.formContainer}
-            initialValues={{
-              firstName: "",
-              lastName: "",
-              email: "",
-              password: "",
-              repeatPassword: "",
-            }}
-            validationSchema={SignupSchema}
-            onSubmit={(values, actions) => {
-              handleSignup(values);
-            }}
-          >
-            {(props) => (
-              <>
-                <View style={styles.nameContainer}>
-                  <View style={styles.nameInputContainer}>
-                    <TextInput
-                      style={[styles.inputField, styles.lastNameInput]}
-                      placeholder="الاسم الأخير"
-                      onChangeText={props.handleChange("lastName")}
-                      onBlur={props.handleBlur("lastName")}
-                      value={props.values.lastName}
-                    />
-                    <Text style={styles.errorText}>
-                      {props.touched.lastName && props.errors.lastName}
-                    </Text>
-                  </View>
-                  <View style={styles.nameInputContainer}>
-                    <TextInput
-                      style={[styles.inputField, styles.firstNameInput]}
-                      placeholder="الاسم الأول"
-                      onChangeText={props.handleChange("firstName")}
-                      onBlur={props.handleBlur("firstName")}
-                      value={props.values.firstName}
-                    />
-                    <Text style={styles.errorText}>
-                      {props.touched.firstName && props.errors.firstName}
-                    </Text>
-                  </View>
-                </View>
-                <View style={styles.input}>
+        <View>
+          <Text style={styles.headerText}>لنبدا</Text>
+        </View>
+        <Formik
+          style={styles.formContainer}
+          initialValues={{
+            firstName: "",
+            lastName: "",
+            email: "",
+            password: "",
+            repeatPassword: "",
+          }}
+          validationSchema={SignupSchema}
+          onSubmit={(values, actions) => {
+            handleSignup(values);
+          }}
+        >
+          {(props) => (
+            <>
+              <View style={styles.nameContainer}>
+                <View style={styles.nameInputContainer}>
                   <TextInput
-                    style={styles.inputField}
-                    placeholder="البريد الإلكتروني"
-                    onChangeText={props.handleChange("email")}
-                    onBlur={props.handleBlur("email")}
-                    value={props.values.email}
+                    style={[styles.inputField, styles.lastNameInput]}
+                    placeholder="الاسم الأخير"
+                    onChangeText={props.handleChange("lastName")}
+                    onBlur={props.handleBlur("lastName")}
+                    value={props.values.lastName}
                   />
                   <Text style={styles.errorText}>
-                    {props.touched.email && props.errors.email}
+                    {props.touched.lastName && props.errors.lastName}
                   </Text>
                 </View>
-                <View style={styles.input}>
+                <View style={styles.nameInputContainer}>
                   <TextInput
-                    style={styles.inputField}
-                    secureTextEntry
-                    placeholder="كلمة المرور"
-                    onChangeText={props.handleChange("password")}
-                    onBlur={props.handleBlur("password")}
-                    value={props.values.password}
+                    style={[styles.inputField, styles.firstNameInput]}
+                    placeholder="الاسم الأول"
+                    onChangeText={props.handleChange("firstName")}
+                    onBlur={props.handleBlur("firstName")}
+                    value={props.values.firstName}
                   />
                   <Text style={styles.errorText}>
-                    {props.touched.password && props.errors.password}
+                    {props.touched.firstName && props.errors.firstName}
                   </Text>
                 </View>
-                <View style={styles.input}>
-                  <TextInput
-                    style={styles.inputField}
-                    secureTextEntry
-                    placeholder="تأكيد كلمة المرور"
-                    onChangeText={props.handleChange("repeatPassword")}
-                    onBlur={props.handleBlur("repeatPassword")}
-                    value={props.values.repeatPassword}
-                  />
-                  <Text style={styles.errorText}>
-                    {props.touched.repeatPassword &&
-                      props.errors.repeatPassword}
-                  </Text>
-                </View>
-                <TouchableOpacity
-                  style={styles.submitButton}
-                  onPress={props.handleSubmit}
-                >
-                  <Text style={styles.buttonText}>
-                    {loading ? "انتظر من فضلك" : " انشاء حساب جديد"}
-                  </Text>
-                </TouchableOpacity>
-              </>
-            )}
-          </Formik>
-          <View>
-            <Text style={styles.footerText}>انشاء حساب جديد بواسطة</Text>
-            <View style={styles.socialLoginContainer}>
-              <Text style={styles.socialLoginText}>goole</Text>
-              <Text style={styles.socialLoginText}>facebook</Text>
-            </View>
-            <View style={{ flexDirection: "row", justifyContent: "center" }}>
-              <TouchableOpacity onPress={() => navigation.navigate("login")}>
-                <Text
-                  style={{
-                    textDecorationLine: "underline",
-                    fontWeight: "bold",
-                  }}
-                >
-                  قم بتسجيل الدخول
+              </View>
+              <View style={styles.input}>
+                <TextInput
+                  style={styles.inputField}
+                  placeholder="البريد الإلكتروني"
+                  onChangeText={props.handleChange("email")}
+                  onBlur={props.handleBlur("email")}
+                  value={props.values.email}
+                />
+                <Text style={styles.errorText}>
+                  {props.touched.email && props.errors.email}
+                </Text>
+              </View>
+              <View style={styles.input}>
+                <TextInput
+                  style={styles.inputField}
+                  secureTextEntry
+                  placeholder="كلمة المرور"
+                  onChangeText={props.handleChange("password")}
+                  onBlur={props.handleBlur("password")}
+                  value={props.values.password}
+                />
+                <Text style={styles.errorText}>
+                  {props.touched.password && props.errors.password}
+                </Text>
+              </View>
+              <View style={styles.input}>
+                <TextInput
+                  style={styles.inputField}
+                  secureTextEntry
+                  placeholder="تأكيد كلمة المرور"
+                  onChangeText={props.handleChange("repeatPassword")}
+                  onBlur={props.handleBlur("repeatPassword")}
+                  value={props.values.repeatPassword}
+                />
+                <Text style={styles.errorText}>
+                  {props.touched.repeatPassword && props.errors.repeatPassword}
+                </Text>
+              </View>
+              <TouchableOpacity
+                style={styles.submitButton}
+                onPress={props.handleSubmit}
+              >
+                <Text style={styles.buttonText}>
+                  {loading ? "انتظر من فضلك" : " انشاء حساب جديد"}
                 </Text>
               </TouchableOpacity>
-              <Text style={styles.loginText}>لديك حساب بالفعل؟</Text>
-            </View>
+            </>
+          )}
+        </Formik>
+        <View>
+          <Text style={styles.footerText}>انشاء حساب جديد بواسطة</Text>
+          <View style={styles.socialLoginContainer}>
+            <Text style={styles.socialLoginText}>goole</Text>
+            <Text style={styles.socialLoginText}>facebook</Text>
+          </View>
+          <View style={{ flexDirection: "row", justifyContent: "center" }}>
+            <TouchableOpacity onPress={() => navigation.navigate("login")}>
+              <Text
+                style={{
+                  textDecorationLine: "underline",
+                  fontWeight: "bold",
+                }}
+              >
+                قم بتسجيل الدخول
+              </Text>
+            </TouchableOpacity>
+            <Text style={styles.loginText}>لديك حساب بالفعل؟</Text>
           </View>
         </View>
       </View>

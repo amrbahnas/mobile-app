@@ -3,12 +3,10 @@ import { StyleSheet } from "react-native";
 export default styles = StyleSheet.create({
   container: {
     flex: 1,
-    paddingHorizontal: 30,
-    paddingVertical: 50,
-  },
-  wrapper: {
     flex: 1,
     justifyContent: "center",
+    paddingHorizontal: 30,
+    paddingVertical: 50,
   },
   headerText: {
     fontSize: 36,
