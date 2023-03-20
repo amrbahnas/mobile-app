@@ -1,21 +1,17 @@
 import { createStackNavigator } from "react-navigation-stack";
 import { createAppContainer } from "react-navigation";
-import Welcome from "../screens/Welcome";
-import Login from "../screens/Login";
-import Signup from "../screens/Signup";
+import Welcome from "../screens/Welcome/Welcome";
+import Login from "../screens/Login/Login";
+import Signup from "../screens/Signup/Signup";
 
 const screens = {
-  Login: {
-    screen: Login,
-    navigationOptions: {
-      title: "",
-      headerStyle: { backgroundColor: "#eee" },
-    },
-  },
-  Welcome: {
+  welcome: {
     screen: Welcome,
   },
-  Signup: {
+  login: {
+    screen: Login,
+  },
+  signup: {
     screen: Signup,
   },
 };
@@ -23,8 +19,7 @@ const screens = {
 // home stack navigator screens
 const HomeStack = createStackNavigator(screens, {
   defaultNavigationOptions: {
-    headerTintColor: "#444",
-    headerStyle: { backgroundColor: "#eee", height: 60 },
+    headerShown: null,
   },
 });
 
