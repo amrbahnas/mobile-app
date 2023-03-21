@@ -4,6 +4,7 @@ import { createNativeStackNavigator } from "@react-navigation/native-stack";
 import Welcome from "./screens/Welcome/Welcome";
 import Login from "./screens/Login/Login";
 import Signup from "./screens/Signup/Signup";
+import Home from "./screens/Home/Home";
 import NavHeader from "./components/NavHeader";
 export default function App() {
   const Stack = createNativeStackNavigator();
@@ -28,6 +29,7 @@ export default function App() {
             headerRight: () => <NavHeader navigation={navigation} />,
           })}
         />
+        <Stack.Screen name="home" component={Home} />
       </Stack.Navigator>
     </NavigationContainer>
   );

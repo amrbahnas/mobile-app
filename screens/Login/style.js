@@ -3,10 +3,10 @@ export default styles = StyleSheet.create({
   container: {
     flex: 1,
     paddingHorizontal: 20,
+    paddingVertical: 100,
     backgroundColor: "#f0f0f0 ",
     justifyContent: "center",
     alignItems: "center",
-    marginTop: 30,
   },
   formContainer: {
     marginBottom: 10,

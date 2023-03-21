@@ -26,7 +26,7 @@ export default Login = ({ navigation }) => {
   useEffect(() => {
     const unsubscribe = onAuthStateChanged(auth, (user) => {
       if (user) {
-        // navigation.navigate("Welcome");
+        navigation.navigate("home");
       }
     });
     return unsubscribe;
@@ -96,14 +96,13 @@ export default Login = ({ navigation }) => {
                     هل نسيت كلمة السر؟
                   </Text>
                 </TouchableOpacity>
-                <CheckBox
-                  style={styles.checkbox}
+                {/* <CheckBox
                   onClick={() => {
                     setRememberMe(!rememberMe);
                   }}
                   isChecked={rememberMe}
                   leftText={"تذكرني في المرة القادمة"}
-                />
+                /> */}
               </View>
               <TouchableOpacity
                 style={styles.button}

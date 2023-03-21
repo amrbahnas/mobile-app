@@ -20,7 +20,7 @@ export const SignupSchema = Yup.object().shape({
     .required("Required"),
   email: Yup.string().email("Invalid email").required("Required"),
   password: Yup.string()
-    .min(8, "Password must be at least 8 characters")
+    .min(6, "Password must be at least 6 characters")
     .required("Required"),
   repeatPassword: Yup.string()
     .oneOf([Yup.ref("password"), null], "Passwords must match")

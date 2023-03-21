@@ -25,7 +25,7 @@ export default Signup = ({ navigation }) => {
   useEffect(() => {
     const unsubscribe = onAuthStateChanged(auth, (user) => {
       if (user) {
-        navigation.navigate("Welcome");
+        navigation.navigate("home");
       }
     });
     return unsubscribe;
@@ -37,9 +37,8 @@ export default Signup = ({ navigation }) => {
     createUserWithEmailAndPassword(auth, email, password)
       .then((userCredentials) => {
         setloading(false);
-
         const user = userCredentials.user;
-        console.log("Registered with:", user.email);
+        navigation.navigate("home");
       })
       .catch((error) => {
         setloading(false);
