@@ -3,13 +3,14 @@ export default styles = StyleSheet.create({
   container: {
     flex: 1,
     paddingHorizontal: 20,
-    paddingVertical: 100,
+    paddingVertical: 75,
     backgroundColor: "#f0f0f0 ",
     justifyContent: "flex-start",
     alignItems: "center",
   },
-  formContainer: {
-    marginBottom: 10,
+  text: {
+    marginBottom: 20,
+    width:"100%"
   },
   input: {
     borderBottomWidth: 1,
@@ -19,25 +20,8 @@ export default styles = StyleSheet.create({
     paddingHorizontal: 10,
     fontSize: 18,
     width: "100%",
+    marginBottom: 20,
   },
-  iconContainer: {
-    position: "absolute",
-    top: 12,
-    lef: 12,
-  },
-  errorText: {
-    color: "red",
-  },
-  row: {
-    flexDirection: "row",
-    alignItems: "center",
-    marginVertical: 10,
-  },
-  rememberMeText: {
-    fontSize: 16,
-    color: "#364458",
-  },
-
   button: {
     backgroundColor: "#7636ff",
     borderRadius: 30,
@@ -51,34 +35,9 @@ export default styles = StyleSheet.create({
     width: "100%",
     alignItems: "center",
   },
-  forgotPassword: {
-    flexDirection: "row",
-    width: "100%",
-    marginVertical: 10,
-    justifyContent: "flex-start",
-  },
-  forgotPasswordText: {
-    fontSize: 16,
-    color: "#7636ff",
-    textDecorationLine: "underline",
-  },
-  newAcc: {
-    backgroundColor: "#e5e5e5",
-    color: "black",
-  },
   buttonText: {
     color: "#fff",
     fontSize: 18,
     fontWeight: "bold",
-  },
-  agreement: {
-    flexDirection: "row",
-    justifyContent: "center",
-    paddingHorizontal: 20,
-    marginTop: 20,
-  },
-  highLightText: {
-    fontSize: 14,
-    color: "#7636ff",
   },
 });

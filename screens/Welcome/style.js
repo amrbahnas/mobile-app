@@ -5,32 +5,35 @@ export default styles = StyleSheet.create({
     flex: 1,
     alignItems: "center",
     justifyContent: "center",
-    backgroundColor: "#f0f0f0",
+    backgroundColor: "#14bbff",
   },
   title: {
-    fontSize: 24,
+    fontSize: 30,
     fontWeight: "bold",
     marginBottom: 20,
-    color: "#333",
+    color: "#fff",
   },
-  subtitle: {
-    fontSize: 18,
-    textAlign: "center",
-    marginHorizontal: 40,
-    marginBottom: 40,
-    color: "#666",
+  image: {
+    width: 392,
+    height: 392,
   },
   button: {
     width: "80%",
     height: 50,
-    backgroundColor: "#ff6b6b",
+    backgroundColor: "#ffffff",
     borderRadius: 5,
     alignItems: "center",
     justifyContent: "center",
+    borderRadius: 20,
+    elevation: 3, // add shadow on Android
+    shadowColor: '#000', // add shadow on iOS
+    shadowOffset: { width: 0, height: 2 },
+    shadowOpacity: 0.3,
+    shadowRadius: 2,
   },
   buttonText: {
     fontSize: 18,
     fontWeight: "bold",
-    color: "#fff",
+    color: "#14bbff",
   },
 });

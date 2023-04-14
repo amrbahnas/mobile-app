@@ -3,49 +3,43 @@ import { StyleSheet } from "react-native";
 export default styles = StyleSheet.create({
   container: {
     flex: 1,
-    flex: 1,
-    justifyContent: "center",
+    justifyContent: "flex-start",
     paddingHorizontal: 30,
-    paddingVertical: 50,
-  },
-  headerText: {
-    fontSize: 36,
-    fontWeight: "bold",
-    marginBottom: 30,
-    textAlign: "center",
-  },
-  formContainer: {
-    marginBottom: 10,
-  },
-  nameContainer: {
-    flexDirection: "row",
-    justifyContent: "space-between",
-    // marginBottom: 10,
-  },
-  nameInputContainer: {
-    width: "48%",
+    paddingVertical: 100,
   },
   input: {
-    // marginBottom: 2,
+    width: "100%",
   },
   inputField: {
-    borderWidth: 1,
-    borderRadius: 10,
-    paddingVertical: 20,
-    paddingHorizontal: 20,
-    direction: "rtl",
-    borderColor: "#bbb",
+    borderBottomWidth: 1,
+    borderBottomColor: "#bbb",
+    direction: "ltr",
+    paddingVertical: 5,
+    paddingHorizontal: 10,
     fontSize: 18,
     width: "100%",
   },
-
+  iconContainer: {
+    position: "absolute",
+    top: 12,
+    lef: 12,
+  },
+  errorText: {
+    color: "red",
+    marginVertical: 2,
+  },
   submitButton: {
-    backgroundColor: "#fca719",
-    padding: 20,
-    borderRadius: 10,
-    marginBottom: 10,
+    backgroundColor: "#7636ff",
+    borderRadius: 30,
+    padding: 15,
+    elevation: 3, // add shadow on Android
+    shadowColor: "#000", // add shadow on iOS
+    shadowOffset: { width: 0, height: 2 },
+    shadowOpacity: 0.3,
+    shadowRadius: 2,
+    marginVertical: 20,
+    width: "100%",
     alignItems: "center",
-    justifyContent: "center",
   },
   buttonText: {
     color: "#fff",

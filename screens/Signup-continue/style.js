@@ -3,68 +3,65 @@ export default styles = StyleSheet.create({
   container: {
     flex: 1,
     paddingHorizontal: 20,
-    paddingVertical: 100,
+    paddingVertical: 130,
     backgroundColor: "#f0f0f0 ",
     justifyContent: "flex-start",
     alignItems: "center",
   },
-  formContainer: {
-    marginBottom: 10,
+  top: {
+    width: "100%",
+    marginBottom: 70,
   },
-  input: {
-    borderBottomWidth: 1,
-    borderBottomColor: "#bbb",
-    direction: "ltr",
-    paddingVertical: 5,
-    paddingHorizontal: 10,
-    fontSize: 18,
+  bottom: {
     width: "100%",
   },
-  iconContainer: {
-    position: "absolute",
-    top: 12,
-    lef: 12,
-  },
-  errorText: {
-    color: "red",
-  },
-  row: {
-    flexDirection: "row",
-    alignItems: "center",
-    marginVertical: 10,
-  },
-  rememberMeText: {
+  title: {
+    fontWeight: "bold",
     fontSize: 16,
-    color: "#364458",
+    textAlign: "right",
+    width: "100%",
+    textAlign: "right",
+    marginBottom: 15,
+  },
+  gender: {
+    display: "flex",
+    width: "100%",
+    flexDirection: "row",
+    justifyContent: "space-between",
+  },
+  box: {
+    width: "48%",
+    height: 150,
+    borderWidth: 1,
+    borderRadius: 5,
+    borderColor: "#ccc",
+    overflow: "hidden",
+  },
+  selectedBox: {
+    backgroundColor: "#007bff",
+    borderColor: "#007bff",
+  },
+  image: {
+    width: "100%",
+    height: "100%",
+  },
+  selectedLabel: {
+    color: "#fff",
   },
 
   button: {
     backgroundColor: "#7636ff",
     borderRadius: 30,
-    padding: 10,
+    padding: 15,
     elevation: 3, // add shadow on Android
     shadowColor: "#000", // add shadow on iOS
     shadowOffset: { width: 0, height: 2 },
     shadowOpacity: 0.3,
     shadowRadius: 2,
-    marginVertical: 5,
+    marginVertical: 40,
     width: "100%",
     alignItems: "center",
-  },
-  forgotPassword: {
-    flexDirection: "row",
-    width: "100%",
-    marginVertical: 10,
-    justifyContent: "flex-start",
-  },
-  forgotPasswordText: {
-    fontSize: 16,
-    color: "#7636ff",
-    textDecorationLine: "underline",
-  },
-  newAcc: {
-    backgroundColor: "#e5e5e5",
-    color: "black",
+    zIndex: -1,
   },
   buttonText: {
     color: "#fff",
