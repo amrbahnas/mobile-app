@@ -41,6 +41,9 @@ export default styles = StyleSheet.create({
     width: "100%",
     alignItems: "center",
   },
+  disabledButton: {
+    opacity: 0.5,
+  },
   buttonText: {
     color: "#fff",
     fontSize: 16,

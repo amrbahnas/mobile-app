@@ -1,0 +1,41 @@
+import { StyleSheet } from "react-native";
+export default styles = StyleSheet.create({
+  container: {
+    flex: 1,
+    justifyContent: "flex-start",
+    alignItems: "center",
+    paddingVertical: 100,
+  },
+  slider: {
+    height: 600,
+  },
+  slide: {
+    flex: 1,
+    justifyContent: "center",
+    alignItems: "center",
+  },
+  image: {
+    width: "100%",
+    height: "100%",
+    resizeMode: "contain",
+  },
+  pagination: {
+    marginBottom: 30,
+  },
+  button: {
+    backgroundColor: "#14bbff",
+    borderRadius: 30,
+    padding: 15,
+    elevation: 3, // add shadow on Android
+    shadowColor: "#000", // add shadow on iOS
+    shadowOffset: { width: 0, height: 2 },
+    shadowOpacity: 0.3,
+    shadowRadius: 2,
+    width: "80%",
+    alignItems: "center",
+  },
+  buttonText: {
+    color: "#fff",
+    fontSize: 20,
+  },
+});

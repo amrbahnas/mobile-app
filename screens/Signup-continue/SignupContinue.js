@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState } from "react";
 import styles from "./style";
 import {
   View,
@@ -8,31 +8,24 @@ import {
   Alert,
 } from "react-native";
 import DropDownPicker from "react-native-dropdown-picker";
-// firebase
-import {
-  createUserWithEmailAndPassword,
-  onAuthStateChanged,
-} from "firebase/auth";
-import { auth } from "../../firebase/firebase.js";
-const SignupContinue = ({ navigation, route }) => {
-  const [loading, setloading] = useState(false);
+
+const SignupContinue = ({ navigation }) => {
   const [gender, setGender] = useState(null);
   const [isOpen, setisOpen] = useState(false);
   const [selectedAge, setselectedAge] = useState(null);
   const [age, setage] = useState([
+    { label: "4", value: "4" },
+    { label: "5", value: "5" },
     { label: "6", value: "6" },
     { label: "7", value: "7" },
     { label: "8", value: "8" },
+    { label: "9", value: "9" },
+    { label: "10", value: "10" },
+    { label: "11", value: "11" },
+    { label: "12", value: "12" },
+    { label: "13", value: "13" },
+    { label: "14", value: "14" },
   ]);
-
-  useEffect(() => {
-    const unsubscribe = onAuthStateChanged(auth, (user) => {
-      if (user) {
-        navigation.navigate("home");
-      }
-    });
-    return unsubscribe;
-  }, []);
 
   const handleSelection = (selectedGender) => {
     setGender(selectedGender);
@@ -41,18 +34,7 @@ const SignupContinue = ({ navigation, route }) => {
 
   const handleSubmit = () => {
     if (gender && selectedAge) {
-      setloading(true);
-      const { email, password } = route.params;
-      createUserWithEmailAndPassword(auth, email, password)
-        .then((userCredentials) => {
-          setloading(false);
-          const user = userCredentials.user;
-          navigation.navigate("home");
-        })
-        .catch((error) => {
-          setloading(false);
-          alert(error.message);
-        });
+      navigation.navigate("loading-page");
     } else {
       Alert.alert("خطأ", "قم بملي البيانات المطلوبة");
     }
@@ -94,6 +76,7 @@ const SignupContinue = ({ navigation, route }) => {
             setOpen={() => setisOpen(!isOpen)}
             value={selectedAge}
             setValue={(value) => setselectedAge(value)}
+            dropDownMaxHeight={150}
             placeholder="اختر العمر"
             placeholderStyle={{ fontSize: 15, textAlign: "center" }}
             showTickIcon={false}
@@ -117,10 +100,10 @@ const SignupContinue = ({ navigation, route }) => {
               width: 20,
               height: 20,
               top: -10,
-              right: 300,
+              right: 280,
             }}
             listItemLabelStyle={{
-              width: "100%",
+              // width: "100%",
               textAlign: "right",
             }}
             selectedItemContainerStyle={{
@@ -134,14 +117,8 @@ const SignupContinue = ({ navigation, route }) => {
             }}
           />
         </View>
-        <TouchableOpacity
-          style={styles.button}
-          onPress={handleSubmit}
-          disabled={loading}
-        >
-          <Text style={styles.buttonText}>
-            {loading ? "برجاء الانتظار" : " انشاء حساب جديد"}
-          </Text>
+        <TouchableOpacity style={styles.button} onPress={handleSubmit}>
+          <Text style={styles.buttonText}>الاستمرار</Text>
         </TouchableOpacity>
         <View style={styles.agreement}>
           <Text

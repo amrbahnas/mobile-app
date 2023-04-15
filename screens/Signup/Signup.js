@@ -1,4 +1,5 @@
-import { useState } from "react";
+import React, { useState, useEffect } from "react";
+
 import {
   View,
   Text,
@@ -6,10 +7,16 @@ import {
   TouchableOpacity,
   TouchableWithoutFeedback,
   Keyboard,
+  Alert,
 } from "react-native";
 // icons
 import Icon from "react-native-vector-icons/FontAwesome";
-
+// firebase
+import {
+  createUserWithEmailAndPassword,
+  onAuthStateChanged,
+} from "firebase/auth";
+import { auth } from "../../firebase/firebase.js";
 // formik
 import { Formik } from "formik";
 import { SignupSchema } from "../../utils/formSchema";
@@ -18,6 +25,16 @@ import styles from "./style.js";
 export default Signup = ({ navigation }) => {
   const [showPassword, setShowPassword] = useState(false);
   const [showRepeatPassword, setShowRepeatPassword] = useState(false);
+  const [loading, setloading] = useState(false);
+
+  useEffect(() => {
+    const unsubscribe = onAuthStateChanged(auth, (user) => {
+      if (user) {
+        navigation.navigate("signup-continue");
+      }
+    });
+    return unsubscribe;
+  }, []);
 
   const handlePasswordVisibility = () => {
     setShowPassword(!showPassword);
@@ -27,17 +44,27 @@ export default Signup = ({ navigation }) => {
   };
 
   const handleSignup = (values) => {
-    navigation.navigate("signup-continue", {
-      email: values.email,
-      password: values.password,
-    });
+    setloading(true);
+    createUserWithEmailAndPassword(auth, values.email, values.password)
+      .then((userCredentials) => {
+        setloading(false);
+        const user = userCredentials.user;
+      })
+      .catch((error) => {
+        setloading(false);
+        if (error.message.includes("email-already-in-use")){
+          Alert.alert("خطأ", "هذا الحساب موجود بالفعل");
+        }else if (error.message.includes("")){
+          Alert.alert("خطأ", "قم بادخال بريد الالكتروني صالح");
+        }
+        else{ alert(error.message)}
+      });
   };
 
   return (
     <TouchableWithoutFeedback onPress={() => Keyboard.dismiss()}>
       <View style={styles.container}>
         <Formik
-          style={styles.formContainer}
           initialValues={{
             name: "",
             email: "",
@@ -131,10 +158,13 @@ export default Signup = ({ navigation }) => {
                 </Text>
               </View>
               <TouchableOpacity
-                style={styles.submitButton}
+                style={[styles.submitButton, loading && styles.disabledButton]}
                 onPress={props.handleSubmit}
+                disabled={loading}
               >
-                <Text style={styles.buttonText}>الاستمرار</Text>
+                <Text style={styles.buttonText}>
+                  {loading ? "برجاء الانتظار" : " انشاء حساب جديد"}
+                </Text>
               </TouchableOpacity>
             </>
           )}

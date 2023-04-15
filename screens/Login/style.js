@@ -71,6 +71,9 @@ export default styles = StyleSheet.create({
     fontSize: 18,
     fontWeight: "bold",
   },
+  disabledButton: {
+    opacity: 0.5,
+  },
   agreement: {
     flexDirection: "row",
     justifyContent: "center",

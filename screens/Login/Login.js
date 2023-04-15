@@ -6,6 +6,7 @@ import {
   TouchableOpacity,
   TouchableWithoutFeedback,
   Keyboard,
+  Alert,
 } from "react-native";
 // icons
 import Icon from "react-native-vector-icons/FontAwesome";
@@ -40,7 +41,12 @@ export default Login = ({ navigation }) => {
       })
       .catch((error) => {
         setLoading(false);
-        alert(error.message);
+        if (error.message.includes("user-not-found"))
+          Alert.alert(
+            "خطأ",
+            "الرجاء التأكد من ادخال البريد الالكتروني والرقم السري صحيحا"
+          );
+        else alert(error.message);
       });
   };
 
@@ -113,8 +119,13 @@ export default Login = ({ navigation }) => {
                 </Text>
               </TouchableOpacity>
               <TouchableOpacity
-                style={[styles.button, styles.newAcc]}
+                style={[
+                  styles.button,
+                  styles.newAcc,
+                  loading && styles.disabledButton,
+                ]}
                 onPress={() => navigation.navigate("signup")}
+                disabled={loading}
               >
                 <Text style={[styles.buttonText, styles.newAcc]}>
                   حساب جديد

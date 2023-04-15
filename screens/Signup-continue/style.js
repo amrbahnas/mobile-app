@@ -3,14 +3,14 @@ export default styles = StyleSheet.create({
   container: {
     flex: 1,
     paddingHorizontal: 20,
-    paddingVertical: 130,
+    paddingVertical: 100,
     backgroundColor: "#f0f0f0 ",
     justifyContent: "flex-start",
     alignItems: "center",
   },
   top: {
     width: "100%",
-    marginBottom: 70,
+    marginBottom: 20,
   },
   bottom: {
     width: "100%",
@@ -72,7 +72,7 @@ export default styles = StyleSheet.create({
     flexDirection: "row",
     justifyContent: "center",
     paddingHorizontal: 20,
-    marginTop: 20,
+    zIndex: -1,
   },
   highLightText: {
     fontSize: 14,
