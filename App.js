@@ -12,6 +12,7 @@ import ChooseOperation from "./screens/Choose-operation/ChooseOperation";
 import Home from "./screens/Home/Home";
 import PerceptionType from "./screens/Perception-type/PerceptionType";
 import DiagnosisStart from "./screens/Diagnosis_start/DiagnosisStart";
+import Questions from "./screens/Questions/Questions";
 export default function App() {
   const Stack = createNativeStackNavigator();
 
@@ -80,6 +81,14 @@ export default function App() {
           <Stack.Screen
             name="diagnosis-start"
             component={DiagnosisStart}
+            options={() => ({
+              headerRight: () => <></>,
+              headerLeft: () => <></>,
+            })}
+          />
+          <Stack.Screen
+            name="questions"
+            component={Questions}
             options={() => ({
               headerRight: () => <></>,
               headerLeft: () => <></>,

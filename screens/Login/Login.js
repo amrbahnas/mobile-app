@@ -25,7 +25,7 @@ export default Login = ({ navigation }) => {
   useEffect(() => {
     const unsubscribe = onAuthStateChanged(auth, (user) => {
       if (user) {
-        navigation.navigate("home");
+        navigation.navigate("choose-operation");
       }
     });
     return unsubscribe;
@@ -46,7 +46,7 @@ export default Login = ({ navigation }) => {
             "خطأ",
             "الرجاء التأكد من ادخال البريد الالكتروني والرقم السري صحيحا"
           );
-        else alert(error.message);
+        else Alert.alert("خطأ", "تاكد من الاتصال بالانترنت");
       });
   };
 

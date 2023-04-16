@@ -34,7 +34,7 @@ const SignupContinue = ({ navigation }) => {
 
   const handleSubmit = () => {
     if (gender && selectedAge) {
-      navigation.navigate("loading-page");
+      navigation.navigate("loading-page", { text: " جاري اعداد حسابك" });
     } else {
       Alert.alert("خطأ", "قم بملي البيانات المطلوبة");
     }

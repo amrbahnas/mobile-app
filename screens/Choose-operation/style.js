@@ -2,12 +2,13 @@ import { StyleSheet } from "react-native";
 export default styles = StyleSheet.create({
   container: {
     flex: 1,
-    justifyContent: "flex-start",
+    justifyContent: "center",
     alignItems: "center",
-    paddingVertical: 100,
+    // paddingVertical: 100,
   },
   slider: {
-    height: 600,
+    height: 400,
+    marginBottom: 20,
   },
   slide: {
     flex: 1,
@@ -20,7 +21,7 @@ export default styles = StyleSheet.create({
     resizeMode: "contain",
   },
   pagination: {
-    marginBottom: 30,
+    marginBottom: -35,
   },
   button: {
     backgroundColor: "#14bbff",

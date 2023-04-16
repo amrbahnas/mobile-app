@@ -52,12 +52,14 @@ export default Signup = ({ navigation }) => {
       })
       .catch((error) => {
         setloading(false);
-        if (error.message.includes("email-already-in-use")){
+        if (error.message.includes("email-already-in-use")) {
           Alert.alert("خطأ", "هذا الحساب موجود بالفعل");
-        }else if (error.message.includes("")){
+        } else if (error.message.includes("invalid-email")) {
           Alert.alert("خطأ", "قم بادخال بريد الالكتروني صالح");
+          alert(error.message);
+        } else {
+          Alert.alert("خطأ", "تاكد من الاتصال بالانترنت");
         }
-        else{ alert(error.message)}
       });
   };
 

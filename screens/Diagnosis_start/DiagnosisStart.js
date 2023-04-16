@@ -5,7 +5,9 @@ import styles from "./style";
 export default DiagnosisStart = ({ navigation }) => {
   return (
     <View style={styles.container}>
-      <Text style={styles.title}>سيبدأ التشخيص الأن</Text>
+      <View style={styles.titleWrapper}>
+        <Text style={styles.title}>سيبدأ التشخيص الأن</Text>
+      </View>
       <Image
         source={require("../../assets/images/to-do.png")}
         style={styles.image}
@@ -14,7 +16,12 @@ export default DiagnosisStart = ({ navigation }) => {
         ستظهر أمامك مجموعة من البنود في كل بند عليك بتحديد مدي انطباق تلك البنود
         علي طفلك سواء كان البند ينطبق دائما او غالبا او احيانا او لايوجد{" "}
       </Text>
-      <TouchableOpacity style={styles.button} onPress={() => {}}>
+      <TouchableOpacity
+        style={styles.button}
+        onPress={() => {
+          navigation.navigate("questions");
+        }}
+      >
         <Text style={styles.buttonText}>بدأ</Text>
       </TouchableOpacity>
     </View>

@@ -3,10 +3,11 @@ import { useEffect } from "react";
 import { View, Text, Image } from "react-native";
 import { ProgressBar } from "react-native-paper";
 import styles from "./style";
-const MyPage = ({ navigation }) => {
+const MyPage = ({ navigation, route }) => {
+  const { text, result } = route.params;
   useEffect(() => {
     const timer = setTimeout(() => {
-      navigation.navigate("choose-operation");
+      if (!result) navigation.navigate("choose-operation");
     }, 3000);
 
     return () => {
@@ -29,7 +30,7 @@ const MyPage = ({ navigation }) => {
             style={styles.progressBar}
           />
         </View>
-        <Text style={styles.loadingText}>جاري اعداد حسابك</Text>
+        <Text style={styles.loadingText}>{text}</Text>
       </View>
     </View>
   );

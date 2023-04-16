@@ -7,12 +7,15 @@ export default styles = StyleSheet.create({
     marginHorizontal: 20,
     marginVertical: 100,
   },
+  titleWrapper: {
+    position: "absolute",
+    top: "0%",
+    width: "100%",
+  },
   title: {
     width: "100%",
     textAlign: "center",
-    position: "absolute",
     fontSize: 21,
-    top: "0%",
     fontWeight: "bold",
   },
   body: {
@@ -23,8 +26,6 @@ export default styles = StyleSheet.create({
     marginVertical: 40,
   },
   image: {
-    width: 253,
-    height: 253,
     marginLeft: 60,
   },
   button: {

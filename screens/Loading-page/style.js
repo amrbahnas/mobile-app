@@ -5,16 +5,20 @@ export default styles = StyleSheet.create({
     flex: 1,
     justifyContent: "center",
     alignItems: "center",
+    marginHorizontal: 20,
   },
   loadingContainer: {
     position: "absolute",
     justifyContent: "center",
     alignItems: "center",
+    marginHorizontal: 20,
   },
   loadingText: {
     fontSize: 18,
     fontWeight: "bold",
     marginTop: 16,
+    textAlign: "center",
+    color: "#959595",
   },
   imageContainer: {
     position: "relative",
@@ -25,7 +29,7 @@ export default styles = StyleSheet.create({
     position: "absolute",
     top: -8,
     left: -8,
-    width:"100%"
+    width: "100%",
   },
   image: {
     width: "100%",
