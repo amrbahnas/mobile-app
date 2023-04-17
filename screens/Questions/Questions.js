@@ -1,5 +1,11 @@
-import React, { useState } from "react";
-import { View, Text, TouchableOpacity, ScrollView } from "react-native";
+import React, { useState, useEffect, useRef } from "react";
+import {
+  View,
+  Text,
+  TouchableOpacity,
+  ScrollView,
+  scrollViewRef,
+} from "react-native";
 import styles from "./style";
 import { questions } from "./data";
 
@@ -8,8 +14,22 @@ const Questions = ({ navigation }) => {
   const [answers, setAnswers] = useState(Array(questions.length).fill(null));
   const [currentQuestionsAnswered, setCurrentQuestionsAnswered] =
     useState(false);
+  const scrollViewRef = useRef(null);
+  useEffect(() => {
+    const startIndex = currentQuestionIndex * 3;
+    const endIndex = Math.min(startIndex + 2, questions.length);
+    for (let i = startIndex; i <= endIndex; i++) {
+      if (answers[i] === null) {
+        setCurrentQuestionsAnswered(false);
+        return;
+      }
+    }
+    setCurrentQuestionsAnswered(true);
+  }, [currentQuestionIndex]);
 
   const handleNext = () => {
+    // Scroll to the top of the page
+    scrollViewRef.current.scrollTo({ x: 0, y: 0, animated: true });
     if (currentQuestionsAnswered) {
       setCurrentQuestionIndex((index) => index + 1);
       setCurrentQuestionsAnswered(false);
@@ -21,6 +41,8 @@ const Questions = ({ navigation }) => {
   };
 
   const handleBack = () => {
+    scrollViewRef.current.scrollTo({ x: 0, y: 0, animated: true });
+
     setCurrentQuestionIndex((index) => index - 1);
   };
 
@@ -83,14 +105,13 @@ const Questions = ({ navigation }) => {
   };
 
   const renderProgressBar = () => {
-    const progress = ((currentQuestionIndex * 3) / questions.length) * 100;
+    const progress = ((currentQuestionIndex * 3) / questions.length) * 100 + 10; // set initial width to 10%
     return (
       <View style={styles.progressBarContainer}>
         <View style={[styles.progressBar, { width: `${progress}%` }]} />
       </View>
     );
   };
-
   const renderButtons = () => {
     return (
       <View style={styles.buttonsContainer}>
@@ -119,7 +140,7 @@ const Questions = ({ navigation }) => {
             onPress={submitAnswers}
             disabled={!currentQuestionsAnswered}
           >
-            <Text style={styles.buttonText}>تقديم</Text>
+            <Text style={styles.submitText}>تقديم</Text>
           </TouchableOpacity>
         )}
       </View>
@@ -137,7 +158,7 @@ const Questions = ({ navigation }) => {
   };
 
   return (
-    <ScrollView>
+    <ScrollView ref={scrollViewRef}>
       <View style={styles.container}>
         {renderProgressBar()}
         {renderQuestions()}

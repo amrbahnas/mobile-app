@@ -77,6 +77,11 @@ export default styles = StyleSheet.create({
     color: "#fff",
     fontSize: 16,
   },
+  submitText: {
+    fontWeight: "bold",
+    color: "#fff",
+    fontSize: 16,
+  },
   disabledButton: {
     opacity: 0.5,
     backgroundColor: "gray",

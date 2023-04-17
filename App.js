@@ -20,7 +20,7 @@ export default function App() {
     <PaperProvider>
       <NavigationContainer>
         <Stack.Navigator
-          initialRouteName="welcome"
+          initialRouteName="questions"
           screenOptions={{
             headerTitle: "",
             headerTransparent: true,
