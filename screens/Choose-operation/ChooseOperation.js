@@ -29,7 +29,7 @@ const ChooseOperation = ({ navigation }) => {
   };
 
   const navigateHandler = () => {
-    navigation.navigate("perception-type", {
+    navigation.navigate("choose-perception", {
       title: perceptionTypeTitles[currentIndex],
     });
   };

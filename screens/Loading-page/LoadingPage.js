@@ -5,15 +5,16 @@ import { ProgressBar } from "react-native-paper";
 import styles from "./style";
 const MyPage = ({ navigation, route }) => {
   const { text, result } = route.params;
-  useEffect(() => {
-    const timer = setTimeout(() => {
-      if (!result) navigation.navigate("choose-operation");
-    }, 3000);
+  // useEffect(() => {
+  //   const timer = setTimeout(() => {
+  //     if (!result) navigation.navigate("choose-operation");
+  //   }, 3000);
 
-    return () => {
-      clearInterval(timer);
-    };
-  }, []);
+  //   return () => {
+  //     clearInterval(timer);
+  //   };
+  // }, []);
+  console.log(result);
 
   return (
     <View style={styles.container}>

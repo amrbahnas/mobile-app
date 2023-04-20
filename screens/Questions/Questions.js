@@ -9,7 +9,9 @@ import {
 import styles from "./style";
 import { questions } from "./data";
 
-const Questions = ({ navigation }) => {
+const Questions = ({ navigation, route }) => {
+  const { selectedboxs } = route.params;
+
   const [currentQuestionIndex, setCurrentQuestionIndex] = useState(0);
   const [answers, setAnswers] = useState(Array(questions.length).fill(null));
   const [currentQuestionsAnswered, setCurrentQuestionsAnswered] =
@@ -46,11 +48,12 @@ const Questions = ({ navigation }) => {
     setCurrentQuestionIndex((index) => index - 1);
   };
 
-  const handleAnswer = (questionId, choiceIndex) => {
+  const handleAnswer = (questionId, choicePoint) => {
     setAnswers((prevAnswers) => {
       const newAnswers = [...prevAnswers];
       const questionIndex = questions.findIndex((q) => q.id === questionId);
-      newAnswers[questionIndex] = choiceIndex;
+      newAnswers[questionIndex] = choicePoint;
+      console.log(newAnswers);
       return newAnswers;
     });
 
@@ -75,7 +78,7 @@ const Questions = ({ navigation }) => {
             <TouchableOpacity
               key={index}
               style={styles.choiceContainer}
-              onPress={() => handleAnswer(question.id, index)}
+              onPress={() => handleAnswer(question.id, question.points[index])}
             >
               <View
                 style={{
@@ -85,7 +88,7 @@ const Questions = ({ navigation }) => {
               >
                 <Text style={styles.choiceText}>{choice}</Text>
                 <View style={styles.radioCircle}>
-                  {answers[question.id - 1] === index && (
+                  {answers[question.id - 1] === question.points[index] && (
                     <View style={styles.selectedRadioCircle} />
                   )}
                 </View>

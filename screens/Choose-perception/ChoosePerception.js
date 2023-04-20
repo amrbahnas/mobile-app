@@ -2,11 +2,12 @@ import React, { useState } from "react";
 import { View, TouchableOpacity, Image } from "react-native";
 import { Checkbox, Text } from "react-native-paper";
 import styles from "./style";
-const MyPage = ({ navigation, route }) => {
+const ChoosePerception = ({ navigation, route }) => {
   const [isChecked1, setIsChecked1] = useState(false);
   const [isChecked2, setIsChecked2] = useState(false);
   const [isChecked3, setIsChecked3] = useState(false);
-  const { title } = route.params;
+  // const { title = "amr" } = route.params;
+  let title = "amr";
   const handleCheck1 = () => setIsChecked1(!isChecked1);
   const handleCheck2 = () => setIsChecked2(!isChecked2);
   const handleCheck3 = () => setIsChecked3(!isChecked3);
@@ -22,7 +23,13 @@ const MyPage = ({ navigation, route }) => {
   };
 
   const nextHandler = () => {
-    navigation.navigate("diagnosis-start");
+    if (isChecked1 || isChecked2 || isChecked3) {
+      const selectedboxs = [];
+      if (isChecked1) selectedboxs.push("Visual");
+      if (isChecked2) selectedboxs.push("audio");
+      if (isChecked3) selectedboxs.push("Sensual");
+      navigation.navigate("diagnosis-start", { selectedboxs });
+    }
   };
 
   return (
@@ -33,6 +40,7 @@ const MyPage = ({ navigation, route }) => {
           <Checkbox.Android
             status={isChecked1 ? "checked" : "unchecked"}
             onPress={handleCheck1}
+            color="#14bbff"
           />
           <View style={styles.rightContent}>
             <Text style={styles.text}>صعوبة الإدراك البصري</Text>
@@ -46,6 +54,7 @@ const MyPage = ({ navigation, route }) => {
           <Checkbox.Android
             status={isChecked2 ? "checked" : "unchecked"}
             onPress={handleCheck2}
+            color="#14bbff"
           />
           <View style={styles.rightContent}>
             <Text style={styles.text}>صعوبة الإدراك السمعي</Text>
@@ -59,6 +68,7 @@ const MyPage = ({ navigation, route }) => {
           <Checkbox.Android
             status={isChecked3 ? "checked" : "unchecked"}
             onPress={handleCheck3}
+            color="#14bbff"
           />
           <View style={styles.rightContent}>
             <Text style={styles.text}>صعوبة الإدراك الحس حركي</Text>
@@ -77,4 +87,4 @@ const MyPage = ({ navigation, route }) => {
   );
 };
 
-export default MyPage;
+export default ChoosePerception;

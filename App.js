@@ -10,7 +10,7 @@ import ForgotPassword from "./screens/Forgot-password/ForgotPassword";
 import LoadingPage from "./screens/Loading-page/LoadingPage";
 import ChooseOperation from "./screens/Choose-operation/ChooseOperation";
 import Home from "./screens/Home/Home";
-import PerceptionType from "./screens/Perception-type/PerceptionType";
+import ChoosePerception from "./screens/Choose-perception/ChoosePerception";
 import DiagnosisStart from "./screens/Diagnosis_start/DiagnosisStart";
 import Questions from "./screens/Questions/Questions";
 export default function App() {
@@ -20,7 +20,7 @@ export default function App() {
     <PaperProvider>
       <NavigationContainer>
         <Stack.Navigator
-          initialRouteName="questions"
+          initialRouteName="choose-perception"
           screenOptions={{
             headerTitle: "",
             headerTransparent: true,
@@ -71,8 +71,8 @@ export default function App() {
             })}
           />
           <Stack.Screen
-            name="perception-type"
-            component={PerceptionType}
+            name="choose-perception"
+            component={ChoosePerception}
             options={() => ({
               headerRight: () => <></>,
               headerLeft: () => <></>,

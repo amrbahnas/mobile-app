@@ -2,7 +2,8 @@ import React from "react";
 
 import { Text, TouchableOpacity, View, Image } from "react-native";
 import styles from "./style";
-export default DiagnosisStart = ({ navigation }) => {
+export default DiagnosisStart = ({ navigation, route }) => {
+  const { selectedboxs } = route.params;
   return (
     <View style={styles.container}>
       <View style={styles.titleWrapper}>
@@ -19,7 +20,7 @@ export default DiagnosisStart = ({ navigation }) => {
       <TouchableOpacity
         style={styles.button}
         onPress={() => {
-          navigation.navigate("questions");
+          navigation.navigate("questions", { selectedboxs });
         }}
       >
         <Text style={styles.buttonText}>بدأ</Text>
