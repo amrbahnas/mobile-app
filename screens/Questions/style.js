@@ -23,10 +23,6 @@ export default styles = StyleSheet.create({
     alignItems: "center",
     marginVertical: 5,
   },
-  chooseWrapper: {
-    flexDirection: "row",
-    justifyContent: "space-between",
-  },
 
   radioCircle: {
     height: 20,

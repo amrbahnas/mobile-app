@@ -1,10 +1,11 @@
 import React, { useState, useEffect, useRef } from "react";
 import { View, Text, TouchableOpacity, ScrollView } from "react-native";
 import styles from "./style";
-import { data1, data2 } from "./data";
+import { data1, data2, data3, data4, data5, data6 } from "./data";
 
 const Questions = ({ navigation, route }) => {
   const { selectedboxs } = route.params;
+  const age = 7;
   const [questions, setquestions] = useState([]);
   const [currentQuestionIndex, setCurrentQuestionIndex] = useState(0);
   const [answers, setAnswers] = useState([]);
@@ -14,8 +15,15 @@ const Questions = ({ navigation, route }) => {
 
   useEffect(() => {
     const data = [];
-    if (selectedboxs.includes("Visual")) data.push(...data1);
-    if (selectedboxs.includes("audio")) data.push(...data2);
+    if (age > 8) {
+      if (selectedboxs.includes("Visual")) data.push(...data1);
+      if (selectedboxs.includes("audio")) data.push(...data2);
+      if (selectedboxs.includes("Sensual")) data.push(...data3);
+    } else {
+      if (selectedboxs.includes("Visual")) data.push(...data4);
+      if (selectedboxs.includes("audio")) data.push(...data5);
+      if (selectedboxs.includes("Sensual")) data.push(...data6);
+    }
     setquestions(data);
     setAnswers(Array(data.length).fill(null));
   }, []);
@@ -77,7 +85,13 @@ const Questions = ({ navigation, route }) => {
     return (
       <View key={question.id} style={styles.singleQuestion}>
         <Text style={styles.questionText}>{question.text}</Text>
-        <View style={styles.chooseWrapper}>
+        <View
+          style={
+            age > 9
+              ? { justifyContent: "space-between", flexDirection: "row" }
+              : { justifyContent: "flex-end", gap: 60, flexDirection: "row" }
+          }
+        >
           {question.choices?.map((choice, index) => (
             <TouchableOpacity
               key={index}
