@@ -1,22 +1,25 @@
 import React, { useState, useEffect, useRef } from "react";
-import {
-  View,
-  Text,
-  TouchableOpacity,
-  ScrollView,
-  scrollViewRef,
-} from "react-native";
+import { View, Text, TouchableOpacity, ScrollView } from "react-native";
 import styles from "./style";
-import { questions } from "./data";
+import { data1, data2 } from "./data";
 
 const Questions = ({ navigation, route }) => {
   const { selectedboxs } = route.params;
-
+  const [questions, setquestions] = useState([]);
   const [currentQuestionIndex, setCurrentQuestionIndex] = useState(0);
-  const [answers, setAnswers] = useState(Array(questions.length).fill(null));
+  const [answers, setAnswers] = useState([]);
   const [currentQuestionsAnswered, setCurrentQuestionsAnswered] =
     useState(false);
   const scrollViewRef = useRef(null);
+
+  useEffect(() => {
+    const data = [];
+    if (selectedboxs.includes("Visual")) data.push(...data1);
+    if (selectedboxs.includes("audio")) data.push(...data2);
+    setquestions(data);
+    setAnswers(Array(data.length).fill(null));
+  }, []);
+
   useEffect(() => {
     const startIndex = currentQuestionIndex * 3;
     const endIndex = Math.min(startIndex + 2, questions.length);
@@ -26,8 +29,9 @@ const Questions = ({ navigation, route }) => {
         return;
       }
     }
+    console.log(answers, "Answer");
     setCurrentQuestionsAnswered(true);
-  }, [currentQuestionIndex]);
+  }, [currentQuestionIndex, answers]);
 
   const handleNext = () => {
     // Scroll to the top of the page
@@ -53,13 +57,13 @@ const Questions = ({ navigation, route }) => {
       const newAnswers = [...prevAnswers];
       const questionIndex = questions.findIndex((q) => q.id === questionId);
       newAnswers[questionIndex] = choicePoint;
-      console.log(newAnswers);
       return newAnswers;
     });
 
     setCurrentQuestionsAnswered(() => {
       const startIndex = currentQuestionIndex * 3;
       const endIndex = Math.min(startIndex + 2, questions.length);
+      console.log(answers, "start");
       for (let i = startIndex; i < endIndex; i++) {
         if (answers[i] === null) {
           return false;
@@ -74,7 +78,7 @@ const Questions = ({ navigation, route }) => {
       <View key={question.id} style={styles.singleQuestion}>
         <Text style={styles.questionText}>{question.text}</Text>
         <View style={styles.chooseWrapper}>
-          {question.choices.map((choice, index) => (
+          {question.choices?.map((choice, index) => (
             <TouchableOpacity
               key={index}
               style={styles.choiceContainer}
@@ -104,11 +108,11 @@ const Questions = ({ navigation, route }) => {
     const startIndex = currentQuestionIndex * 3;
     const endIndex = Math.min(startIndex + 3, questions.length);
 
-    return questions.slice(startIndex, endIndex).map(renderQuestion);
+    return questions.slice(startIndex, endIndex)?.map(renderQuestion);
   };
 
   const renderProgressBar = () => {
-    const progress = ((currentQuestionIndex * 3) / questions.length) * 100 + 10; // set initial width to 10%
+    const progress = ((currentQuestionIndex * 3) / questions.length) * 100; // set initial width to 10%
     return (
       <View style={styles.progressBarContainer}>
         <View style={[styles.progressBar, { width: `${progress}%` }]} />

@@ -28,7 +28,9 @@ const ChoosePerception = ({ navigation, route }) => {
       if (isChecked1) selectedboxs.push("Visual");
       if (isChecked2) selectedboxs.push("audio");
       if (isChecked3) selectedboxs.push("Sensual");
-      navigation.navigate("diagnosis-start", { selectedboxs });
+      navigation.navigate("diagnosis-start", {
+        selectedboxs: selectedboxs.join(""),
+      });
     }
   };
 
