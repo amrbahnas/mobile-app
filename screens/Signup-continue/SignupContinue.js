@@ -8,14 +8,18 @@ import {
   Alert,
 } from "react-native";
 import DropDownPicker from "react-native-dropdown-picker";
-
-const SignupContinue = ({ navigation }) => {
+// firebase
+import { doc, setDoc } from "firebase/firestore";
+import { db } from "../../firebase/firebase";
+// global state
+import useStore from "../../hooks/userInfo";
+const SignupContinue = ({ navigation, route }) => {
+  const { setUser } = useStore();
+  const { id, name, email } = route.params;
   const [gender, setGender] = useState(null);
   const [isOpen, setisOpen] = useState(false);
   const [selectedAge, setselectedAge] = useState(null);
-  const [age, setage] = useState([
-    { label: "4", value: "4" },
-    { label: "5", value: "5" },
+  const age = [
     { label: "6", value: "6" },
     { label: "7", value: "7" },
     { label: "8", value: "8" },
@@ -25,16 +29,27 @@ const SignupContinue = ({ navigation }) => {
     { label: "12", value: "12" },
     { label: "13", value: "13" },
     { label: "14", value: "14" },
-  ]);
+  ];
 
   const handleSelection = (selectedGender) => {
     setGender(selectedGender);
-    console.log(selectedGender);
   };
 
   const handleSubmit = () => {
     if (gender && selectedAge) {
-      navigation.navigate("loading-page", { text: " جاري اعداد حسابك" });
+      const userData = {
+        name,
+        email,
+        gender,
+        age: selectedAge,
+      };
+      setDoc(doc(db, "users", id), userData).then(() => {
+        setUser(userData);
+        navigation.navigate("loading-page", {
+          text: " جاري اعداد حسابك",
+          target: "introduction-video",
+        });
+      });
     } else {
       Alert.alert("خطأ", "قم بملي البيانات المطلوبة");
     }
@@ -76,7 +91,8 @@ const SignupContinue = ({ navigation }) => {
             setOpen={() => setisOpen(!isOpen)}
             value={selectedAge}
             setValue={(value) => setselectedAge(value)}
-            dropDownMaxHeight={150}
+            // dropDownMaxHeight={150}
+            maxHeight={200}
             placeholder="اختر العمر"
             placeholderStyle={{ fontSize: 15, textAlign: "center" }}
             showTickIcon={false}

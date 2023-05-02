@@ -4,29 +4,26 @@ export default styles = StyleSheet.create({
   container: {
     flex: 1,
     alignItems: "center",
-    justifyContent: "center",
-    backgroundColor: "#14bbff",
+    backgroundColor: "#fffdff",
   },
-  title: {
-    fontSize: 30,
-    fontWeight: "bold",
-    marginBottom: 20,
-    color: "#fff",
+  videoContainer: {
+    width: "100%",
+    height: "70%",
   },
-  image: {
-    width: 392,
-    height: 392,
+  video: {
+    width: "100%",
+    height: 500,
   },
   button: {
     width: "80%",
     height: 50,
-    backgroundColor: "#ffffff",
+    backgroundColor: "#ed7820",
     borderRadius: 5,
     alignItems: "center",
     justifyContent: "center",
     borderRadius: 20,
     elevation: 3, // add shadow on Android
-    shadowColor: '#000', // add shadow on iOS
+    shadowColor: "#000", // add shadow on iOS
     shadowOffset: { width: 0, height: 2 },
     shadowOpacity: 0.3,
     shadowRadius: 2,
@@ -34,6 +31,6 @@ export default styles = StyleSheet.create({
   buttonText: {
     fontSize: 18,
     fontWeight: "bold",
-    color: "#14bbff",
+    color: "#fff",
   },
 });

@@ -11,42 +11,45 @@ import {
 // icons
 import Icon from "react-native-vector-icons/FontAwesome";
 // firebase
-import { signInWithEmailAndPassword, onAuthStateChanged } from "firebase/auth";
+import { signInWithEmailAndPassword } from "firebase/auth";
 import { auth } from "../../firebase/firebase";
+import { getFirestore, doc, getDoc } from "firebase/firestore";
+import { db } from "../../firebase/firebase";
 // formik
 import { Formik } from "formik";
 import { loginSchema } from "../../utils/formSchema";
+// global state
+import useStore from "../../hooks/userInfo";
 // styles
 import styles from "./style.js";
 export default Login = ({ navigation }) => {
+  const { setUser } = useStore();
   const [loading, setLoading] = useState(false);
   const [showPassword, setShowPassword] = useState(false);
-
-  useEffect(() => {
-    const unsubscribe = onAuthStateChanged(auth, (user) => {
-      if (user) {
-        navigation.navigate("choose-operation");
-      }
-    });
-    return unsubscribe;
-  }, []);
-
   const handleLogin = ({ email, password }) => {
     setLoading(true);
     signInWithEmailAndPassword(auth, email, password)
       .then((userCredentials) => {
-        setLoading(false);
         const user = userCredentials.user;
-        console.log("Logged in with:", user.email);
+        const docRef = doc(db, "users", user.uid);
+        getDoc(docRef).then((doc) => {
+          setUser(doc.data());
+          setLoading(false);
+          navigation.navigate("choose-operation");
+        });
       })
       .catch((error) => {
         setLoading(false);
         if (error.message.includes("user-not-found"))
+          Alert.alert("خطأ", "تأكد من  البريد الالكتروني");
+        else if (error.message.includes("wrong-password"))
+          Alert.alert("خطأ", "تأكد من الرقم السري");
+        else if (error.message.includes("too-many-requests"))
           Alert.alert(
-            "خطأ",
-            "الرجاء التأكد من ادخال البريد الالكتروني والرقم السري صحيحا"
+            "تم الحظر",
+            "لقد ادخل كلمة المرور اكتر من مرة يمكنك استعاده كلمه السر للدخول"
           );
-        else Alert.alert("خطأ", "تاكد من الاتصال بالانترنت");
+        else Alert.alert("خطأ", error.message);
       });
   };
 
@@ -60,8 +63,8 @@ export default Login = ({ navigation }) => {
         <Formik
           style={styles.formContainer}
           initialValues={{
-            email: "",
-            password: "",
+            email: "qq@gmail.com",
+            password: "123123123",
           }}
           validationSchema={loginSchema}
           onSubmit={(values, actions) => {

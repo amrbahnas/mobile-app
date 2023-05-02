@@ -1,5 +1,9 @@
 import { useState } from "react";
 import styles from "./style";
+// firebase
+import { sendPasswordResetEmail } from "firebase/auth";
+import { auth } from "../../firebase/firebase";
+
 import {
   View,
   Text,
@@ -7,12 +11,36 @@ import {
   TouchableOpacity,
   TouchableWithoutFeedback,
   Keyboard,
+  Alert,
 } from "react-native";
 
-const ForgotPassword = () => {
+const ForgotPassword = ({ navigation }) => {
   const [loading, setLoading] = useState(false);
   const [email, setemail] = useState("");
-
+  const handleOkPress = () => {
+    navigation.navigate("login");
+  };
+  resetPasswordHandler = () => {
+    if (email) {
+      setLoading(true);
+      sendPasswordResetEmail(auth, email)
+        .then((task) => {
+          setLoading(false);
+          Alert.alert(
+            "تم الارسال",
+            "تم ارسال لينك اعادة تعيين كلمةالمرور انظر صندوق البريد",
+            [
+              { text: "Cancel", style: "cancel" },
+              { text: "OK", onPress: handleOkPress },
+            ]
+          );
+        })
+        .catch((error) => {
+          setLoading(false);
+          Alert.alert("خطأ", "قم بادخال البريد الالكتروني بشكل صحيح");
+        });
+    }
+  };
   return (
     <TouchableWithoutFeedback onPress={() => Keyboard.dismiss()}>
       <View style={styles.container}>
@@ -27,7 +55,7 @@ const ForgotPassword = () => {
           textAlign="right"
           writingDirection="rtl"
         />
-        <TouchableOpacity style={styles.button} onPress={()=>{}}>
+        <TouchableOpacity style={styles.button} onPress={resetPasswordHandler}>
           <Text style={styles.buttonText}>
             {loading ? "جاري التحميل" : "الاستمرار"}
           </Text>

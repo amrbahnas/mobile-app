@@ -1,30 +1,40 @@
-import React,{useEffect} from "react";
+import { useEffect, useRef } from "react";
 import { onAuthStateChanged } from "firebase/auth";
 import { auth } from "../../firebase/firebase";
-import { Text, TouchableOpacity, View ,Image} from "react-native";
+import { Text, TouchableOpacity, View, Image } from "react-native";
+import { Video, ResizeMode } from "expo-av";
+
 import styles from "./style";
 export default Welcome = ({ navigation }) => {
+  const video = useRef(null);
   const handleGetStarted = () => {
-    // Handle button press to navigate to next screen
     navigation.navigate("login");
   };
-  
-    useEffect(() => {
-      const unsubscribe = onAuthStateChanged(auth, (user) => {
-        if (user) {
-          navigation.navigate("home");
-        }
-      });
-      return unsubscribe;
-    }, []);
+
+  // useEffect(() => {
+  //   const unsubscribe = onAuthStateChanged(auth, (user) => {
+  //     if (user) {
+  //       navigation.navigate("home");
+  //     }
+  //   });
+  //   return unsubscribe;
+  // }, []);
 
   return (
     <View style={styles.container}>
-      <Text style={styles.title}>ايدراك</Text>
-      <Image
-        source={require("../../assets/images/welcome-logo.png")}
-        style={styles.image}
-      />
+      <View style={styles.videoContainer}>
+        <Video
+          ref={video}
+          source={require("../../assets/videos/welcome.mp4")}
+          style={styles.video}
+          useNativeControls={false}
+          resizeMode={ResizeMode.CONTAIN}
+          isLooping={false}
+          onLoad={() => {
+            video.current.playAsync();
+          }}
+        />
+      </View>
       <TouchableOpacity style={styles.button} onPress={handleGetStarted}>
         <Text style={styles.buttonText}>استمرار</Text>
       </TouchableOpacity>

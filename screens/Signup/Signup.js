@@ -27,15 +27,6 @@ export default Signup = ({ navigation }) => {
   const [showRepeatPassword, setShowRepeatPassword] = useState(false);
   const [loading, setloading] = useState(false);
 
-  useEffect(() => {
-    const unsubscribe = onAuthStateChanged(auth, (user) => {
-      if (user) {
-        navigation.navigate("signup-continue");
-      }
-    });
-    return unsubscribe;
-  }, []);
-
   const handlePasswordVisibility = () => {
     setShowPassword(!showPassword);
   };
@@ -49,6 +40,11 @@ export default Signup = ({ navigation }) => {
       .then((userCredentials) => {
         setloading(false);
         const user = userCredentials.user;
+        navigation.navigate("signup-continue", {
+          id: user.uid,
+          name: values.name,
+          email: values.email,
+        });
       })
       .catch((error) => {
         setloading(false);

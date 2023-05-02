@@ -174,7 +174,7 @@ const Questions = ({ navigation, route }) => {
     const result = answers.reduce((a, b) => a + b);
     navigation.navigate("loading-page", {
       text: "جاري تحليل بياناتك ومن ثمه إعداد البرنامج المناسب لطفلك",
-      result,
+      target: "loading-page",
     });
   };
 

@@ -1,20 +1,17 @@
 import { useEffect } from "react";
-
 import { View, Text, Image } from "react-native";
 import { ProgressBar } from "react-native-paper";
 import styles from "./style";
 const MyPage = ({ navigation, route }) => {
-  const { text, result } = route.params;
-  // useEffect(() => {
-  //   const timer = setTimeout(() => {
-  //     if (!result) navigation.navigate("choose-operation");
-  //   }, 3000);
-
-  //   return () => {
-  //     clearInterval(timer);
-  //   };
-  // }, []);
-  console.log(result);
+  const { text, target } = route.params;
+  useEffect(() => {
+    const timer = setTimeout(() => {
+      navigation.navigate(target);
+    }, 3000);
+    return () => {
+      clearInterval(timer);
+    };
+  }, []);
 
   return (
     <View style={styles.container}>

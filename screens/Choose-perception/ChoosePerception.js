@@ -6,8 +6,7 @@ const ChoosePerception = ({ navigation, route }) => {
   const [isChecked1, setIsChecked1] = useState(false);
   const [isChecked2, setIsChecked2] = useState(false);
   const [isChecked3, setIsChecked3] = useState(false);
-  // const { title = "amr" } = route.params;
-  let title = "amr";
+  const { title } = route.params;
   const handleCheck1 = () => setIsChecked1(!isChecked1);
   const handleCheck2 = () => setIsChecked2(!isChecked2);
   const handleCheck3 = () => setIsChecked3(!isChecked3);

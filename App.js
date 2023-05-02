@@ -1,6 +1,7 @@
 import { Text, StyleSheet } from "react-native";
 import { Provider as PaperProvider } from "react-native-paper";
 import { NavigationContainer } from "@react-navigation/native";
+import { createDrawerNavigator } from "@react-navigation/drawer";
 import { createNativeStackNavigator } from "@react-navigation/native-stack";
 import Welcome from "./screens/Welcome/Welcome";
 import Login from "./screens/Login/Login";
@@ -13,14 +14,20 @@ import Home from "./screens/Home/Home";
 import ChoosePerception from "./screens/Choose-perception/ChoosePerception";
 import DiagnosisStart from "./screens/Diagnosis_start/DiagnosisStart";
 import Questions from "./screens/Questions/Questions";
+import IntroductionVideo from "./screens/Introduction-video/IntroductionVideo";
+
 export default function App() {
   const Stack = createNativeStackNavigator();
-
+  const Drawer = createDrawerNavigator();
   return (
     <PaperProvider>
       <NavigationContainer>
+        <Drawer.Navigator initialRouteName="welcome">
+          <Drawer.Screen name="welcome" component={Welcome} />
+          <Drawer.Screen name="login" component={Login} />
+        </Drawer.Navigator>
         <Stack.Navigator
-          initialRouteName="choose-perception"
+          initialRouteName="welcome"
           screenOptions={{
             headerTitle: "",
             headerTransparent: true,
@@ -89,6 +96,14 @@ export default function App() {
           <Stack.Screen
             name="questions"
             component={Questions}
+            options={() => ({
+              headerRight: () => <></>,
+              headerLeft: () => <></>,
+            })}
+          />
+          <Stack.Screen
+            name="introduction-video"
+            component={IntroductionVideo}
             options={() => ({
               headerRight: () => <></>,
               headerLeft: () => <></>,

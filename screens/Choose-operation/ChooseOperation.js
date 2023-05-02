@@ -2,7 +2,12 @@ import React, { useState } from "react";
 import { View, Text, Image, TouchableOpacity } from "react-native";
 import Swiper from "react-native-swiper";
 import styles from "./style";
+// global state
+import useStore from "../../hooks/userInfo";
 const ChooseOperation = ({ navigation }) => {
+  const {
+    user: { name, email, gender, age },
+  } = useStore();
   const [currentIndex, setCurrentIndex] = useState(0);
   const perceptionTypeTitles = {
     0: "اختر الصعوبات الإدراكية التي تواجه الطفل ",
@@ -52,7 +57,7 @@ const ChooseOperation = ({ navigation }) => {
         </Swiper>
       </View>
       <TouchableOpacity style={styles.button} onPress={navigateHandler}>
-        <Text style={styles.buttonText}>{images[currentIndex].label}</Text>
+        <Text style={styles.buttonText}>{images[currentIndex]?.label}</Text>
       </TouchableOpacity>
     </View>
   );
