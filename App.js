@@ -1,7 +1,6 @@
 import { Text, StyleSheet } from "react-native";
 import { Provider as PaperProvider } from "react-native-paper";
 import { NavigationContainer } from "@react-navigation/native";
-import { createDrawerNavigator } from "@react-navigation/drawer";
 import { createNativeStackNavigator } from "@react-navigation/native-stack";
 import Welcome from "./screens/Welcome/Welcome";
 import Login from "./screens/Login/Login";
@@ -9,25 +8,19 @@ import Signup from "./screens/Signup/Signup";
 import SignupContinue from "./screens/Signup-continue/SignupContinue";
 import ForgotPassword from "./screens/Forgot-password/ForgotPassword";
 import LoadingPage from "./screens/Loading-page/LoadingPage";
-import ChooseOperation from "./screens/Choose-operation/ChooseOperation";
-import Home from "./screens/Home/Home";
-import ChoosePerception from "./screens/Choose-perception/ChoosePerception";
-import DiagnosisStart from "./screens/Diagnosis_start/DiagnosisStart";
-import Questions from "./screens/Questions/Questions";
 import IntroductionVideo from "./screens/Introduction-video/IntroductionVideo";
-
+import DrawerPages from "./navigations/DrawerPages";
+import modelStore from "./hooks/model";
+import Loading from "./components/Loading";
 export default function App() {
   const Stack = createNativeStackNavigator();
-  const Drawer = createDrawerNavigator();
+  const { isOpen } = modelStore();
+
   return (
     <PaperProvider>
       <NavigationContainer>
-        <Drawer.Navigator initialRouteName="welcome">
-          <Drawer.Screen name="welcome" component={Welcome} />
-          <Drawer.Screen name="login" component={Login} />
-        </Drawer.Navigator>
         <Stack.Navigator
-          initialRouteName="welcome"
+          initialRouteName="user-pages"
           screenOptions={{
             headerTitle: "",
             headerTransparent: true,
@@ -69,38 +62,7 @@ export default function App() {
           />
 
           <Stack.Screen name="loading-page" component={LoadingPage} />
-          <Stack.Screen
-            name="choose-operation"
-            component={ChooseOperation}
-            options={() => ({
-              headerRight: () => <></>,
-              headerLeft: () => <></>,
-            })}
-          />
-          <Stack.Screen
-            name="choose-perception"
-            component={ChoosePerception}
-            options={() => ({
-              headerRight: () => <></>,
-              headerLeft: () => <></>,
-            })}
-          />
-          <Stack.Screen
-            name="diagnosis-start"
-            component={DiagnosisStart}
-            options={() => ({
-              headerRight: () => <></>,
-              headerLeft: () => <></>,
-            })}
-          />
-          <Stack.Screen
-            name="questions"
-            component={Questions}
-            options={() => ({
-              headerRight: () => <></>,
-              headerLeft: () => <></>,
-            })}
-          />
+
           <Stack.Screen
             name="introduction-video"
             component={IntroductionVideo}
@@ -109,8 +71,16 @@ export default function App() {
               headerLeft: () => <></>,
             })}
           />
-          <Stack.Screen name="home" component={Home} />
+          <Stack.Screen
+            name="drawer-pages"
+            component={DrawerPages}
+            options={() => ({
+              headerRight: () => <></>,
+              headerLeft: () => <></>,
+            })}
+          />
         </Stack.Navigator>
+        {isOpen && <Loading />}
       </NavigationContainer>
     </PaperProvider>
   );

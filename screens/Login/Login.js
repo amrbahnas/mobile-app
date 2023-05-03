@@ -20,26 +20,39 @@ import { Formik } from "formik";
 import { loginSchema } from "../../utils/formSchema";
 // global state
 import useStore from "../../hooks/userInfo";
+import modelStore from "../../hooks/model";
 // styles
 import styles from "./style.js";
+
 export default Login = ({ navigation }) => {
   const { setUser } = useStore();
+  const { setIsOpen } = modelStore();
   const [loading, setLoading] = useState(false);
   const [showPassword, setShowPassword] = useState(false);
   const handleLogin = ({ email, password }) => {
     setLoading(true);
+    setIsOpen();
     signInWithEmailAndPassword(auth, email, password)
       .then((userCredentials) => {
         const user = userCredentials.user;
         const docRef = doc(db, "users", user.uid);
         getDoc(docRef).then((doc) => {
-          setUser(doc.data());
-          setLoading(false);
-          navigation.navigate("choose-operation");
+          if (doc.data().age) {
+            setUser(doc.data());
+            setLoading(false);
+            setIsOpen();
+            navigation.navigate("drawer-pages");
+          } else {
+            setIsOpen();
+            navigation.navigate("signup-continue", {
+              id: user.uid,
+            });
+          }
         });
       })
       .catch((error) => {
         setLoading(false);
+        setIsOpen();
         if (error.message.includes("user-not-found"))
           Alert.alert("خطأ", "تأكد من  البريد الالكتروني");
         else if (error.message.includes("wrong-password"))
@@ -63,8 +76,8 @@ export default Login = ({ navigation }) => {
         <Formik
           style={styles.formContainer}
           initialValues={{
-            email: "qq@gmail.com",
-            password: "123123123",
+            email: "eng.elbahnsawy@gmail.com",
+            password: "123123",
           }}
           validationSchema={loginSchema}
           onSubmit={(values, actions) => {

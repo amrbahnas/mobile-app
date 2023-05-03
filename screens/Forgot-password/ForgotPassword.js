@@ -3,6 +3,7 @@ import styles from "./style";
 // firebase
 import { sendPasswordResetEmail } from "firebase/auth";
 import { auth } from "../../firebase/firebase";
+import modelStore from "../../hooks/model";
 
 import {
   View,
@@ -15,6 +16,8 @@ import {
 } from "react-native";
 
 const ForgotPassword = ({ navigation }) => {
+  const { setIsOpen } = modelStore();
+
   const [loading, setLoading] = useState(false);
   const [email, setemail] = useState("");
   const handleOkPress = () => {
@@ -23,9 +26,11 @@ const ForgotPassword = ({ navigation }) => {
   resetPasswordHandler = () => {
     if (email) {
       setLoading(true);
+      setIsOpen();
       sendPasswordResetEmail(auth, email)
         .then((task) => {
           setLoading(false);
+          setIsOpen();
           Alert.alert(
             "تم الارسال",
             "تم ارسال لينك اعادة تعيين كلمةالمرور انظر صندوق البريد",
@@ -37,8 +42,11 @@ const ForgotPassword = ({ navigation }) => {
         })
         .catch((error) => {
           setLoading(false);
+          setIsOpen();
           Alert.alert("خطأ", "قم بادخال البريد الالكتروني بشكل صحيح");
         });
+    } else {
+      Alert.alert("خطأ", "قم بادخال البريد الالكتروني بشكل صحيح");
     }
   };
   return (

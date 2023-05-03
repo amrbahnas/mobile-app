@@ -10,7 +10,7 @@ export default IntroductionVideo = ({ navigation }) => {
   let count = 0;
   const video = useRef(null);
   const handleClick = () => {
-    navigation.navigate("choose-operation");
+    navigation.navigate("drawer-pages");
   };
   return (
     <View style={styles.container}>

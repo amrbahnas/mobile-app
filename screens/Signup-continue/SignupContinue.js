@@ -9,13 +9,17 @@ import {
 } from "react-native";
 import DropDownPicker from "react-native-dropdown-picker";
 // firebase
-import { doc, setDoc } from "firebase/firestore";
+import { doc, getDoc, updateDoc } from "firebase/firestore";
 import { db } from "../../firebase/firebase";
 // global state
 import useStore from "../../hooks/userInfo";
+import modelStore from "../../hooks/model";
+
 const SignupContinue = ({ navigation, route }) => {
   const { setUser } = useStore();
-  const { id, name, email } = route.params;
+  const { setIsOpen } = modelStore();
+
+  const { id } = route.params;
   const [gender, setGender] = useState(null);
   const [isOpen, setisOpen] = useState(false);
   const [selectedAge, setselectedAge] = useState(null);
@@ -37,17 +41,20 @@ const SignupContinue = ({ navigation, route }) => {
 
   const handleSubmit = () => {
     if (gender && selectedAge) {
+      setIsOpen();
       const userData = {
-        name,
-        email,
         gender,
         age: selectedAge,
       };
-      setDoc(doc(db, "users", id), userData).then(() => {
-        setUser(userData);
-        navigation.navigate("loading-page", {
-          text: " جاري اعداد حسابك",
-          target: "introduction-video",
+      const docRef = doc(db, "users", id);
+      updateDoc(docRef, userData).then(() => {
+        getDoc(docRef).then((doc) => {
+          setIsOpen();
+          setUser(doc.data());
+          navigation.navigate("loading-page", {
+            text: " جاري اعداد حسابك",
+            target: "introduction-video",
+          });
         });
       });
     } else {

@@ -17,12 +17,18 @@ import {
   onAuthStateChanged,
 } from "firebase/auth";
 import { auth } from "../../firebase/firebase.js";
+import { doc, setDoc } from "firebase/firestore";
+import { db } from "../../firebase/firebase";
 // formik
 import { Formik } from "formik";
 import { SignupSchema } from "../../utils/formSchema";
 // style
 import styles from "./style.js";
+import modelStore from "../../hooks/model";
+
 export default Signup = ({ navigation }) => {
+  const { setIsOpen } = modelStore();
+
   const [showPassword, setShowPassword] = useState(false);
   const [showRepeatPassword, setShowRepeatPassword] = useState(false);
   const [loading, setloading] = useState(false);
@@ -36,18 +42,25 @@ export default Signup = ({ navigation }) => {
 
   const handleSignup = (values) => {
     setloading(true);
+    setIsOpen();
     createUserWithEmailAndPassword(auth, values.email, values.password)
       .then((userCredentials) => {
-        setloading(false);
         const user = userCredentials.user;
-        navigation.navigate("signup-continue", {
-          id: user.uid,
+        const userData = {
           name: values.name,
           email: values.email,
+        };
+        setDoc(doc(db, "users", user.uid), userData).then(() => {
+          setloading(false);
+          setIsOpen();
+          navigation.navigate("signup-continue", {
+            id: user.uid,
+          });
         });
       })
       .catch((error) => {
         setloading(false);
+        setIsOpen();
         if (error.message.includes("email-already-in-use")) {
           Alert.alert("خطأ", "هذا الحساب موجود بالفعل");
         } else if (error.message.includes("invalid-email")) {
