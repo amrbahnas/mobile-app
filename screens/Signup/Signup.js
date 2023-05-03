@@ -28,7 +28,6 @@ import modelStore from "../../hooks/model";
 
 export default Signup = ({ navigation }) => {
   const { setIsOpen } = modelStore();
-
   const [showPassword, setShowPassword] = useState(false);
   const [showRepeatPassword, setShowRepeatPassword] = useState(false);
   const [loading, setloading] = useState(false);

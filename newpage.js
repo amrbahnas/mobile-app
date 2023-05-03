@@ -16,3 +16,20 @@ export default styles = StyleSheet.create({
     backgroundColor: "#fffdff",
   },
 });
+
+
+
+// IntroductionVideo reset navigate
+
+
+    navigation.reset({
+      index: 0,
+      routes: [{ name: "drawer-pages" }],
+    });
+
+
+      useEffect(() => {
+    navigation.addListener("beforeRemove", (event) => {
+      event.preventDefault();
+    });
+  }, [navigation]);

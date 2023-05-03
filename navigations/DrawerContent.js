@@ -15,14 +15,17 @@ export default DrawerContent = (props) => {
   const {
     user: { name, email, gender, age },
   } = useStore();
-  const nav = useNavigation();
+  const navigation = useNavigation();
   const signOutHandler = async (props) => {
     const auth = getAuth();
     // sign out the current user
     signOut(auth)
       .then(() => {
         // Sign-out successful.
-        nav.navigate("login");
+        navigation.reset({
+          index: 0,
+          routes: [{ name: "login" }],
+        });
       })
       .catch((error) => {
         // An error happened.

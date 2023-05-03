@@ -15,12 +15,11 @@ import Loading from "./components/Loading";
 export default function App() {
   const Stack = createNativeStackNavigator();
   const { isOpen } = modelStore();
-
   return (
     <PaperProvider>
       <NavigationContainer>
         <Stack.Navigator
-          initialRouteName="user-pages"
+          initialRouteName="welcome"
           screenOptions={{
             headerTitle: "",
             headerTransparent: true,
@@ -61,7 +60,14 @@ export default function App() {
             })}
           />
 
-          <Stack.Screen name="loading-page" component={LoadingPage} />
+          <Stack.Screen
+            name="loading-page"
+            component={LoadingPage}
+            options={() => ({
+              headerRight: () => <></>,
+              headerLeft: () => <></>,
+            })}
+          />
 
           <Stack.Screen
             name="introduction-video"

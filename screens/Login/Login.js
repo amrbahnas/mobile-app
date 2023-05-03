@@ -23,12 +23,12 @@ import useStore from "../../hooks/userInfo";
 import modelStore from "../../hooks/model";
 // styles
 import styles from "./style.js";
-
 export default Login = ({ navigation }) => {
   const { setUser } = useStore();
   const { setIsOpen } = modelStore();
   const [loading, setLoading] = useState(false);
   const [showPassword, setShowPassword] = useState(false);
+
   const handleLogin = ({ email, password }) => {
     setLoading(true);
     setIsOpen();
@@ -41,7 +41,10 @@ export default Login = ({ navigation }) => {
             setUser(doc.data());
             setLoading(false);
             setIsOpen();
-            navigation.navigate("drawer-pages");
+            navigation.reset({
+              index: 0,
+              routes: [{ name: "drawer-pages" }],
+            });
           } else {
             setIsOpen();
             navigation.navigate("signup-continue", {

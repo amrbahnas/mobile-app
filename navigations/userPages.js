@@ -4,6 +4,7 @@ import ChooseOperation from "../screens/Choose-operation/ChooseOperation";
 import ChoosePerception from "../screens/Choose-perception/ChoosePerception";
 import DiagnosisStart from "../screens/Diagnosis_start/DiagnosisStart";
 import Questions from "../screens/Questions/Questions";
+
 const UserPages = () => {
   const Stack = createNativeStackNavigator();
 

@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import { useState, useEffect } from "react";
 import styles from "./style";
 import {
   View,
@@ -18,7 +18,6 @@ import modelStore from "../../hooks/model";
 const SignupContinue = ({ navigation, route }) => {
   const { setUser } = useStore();
   const { setIsOpen } = modelStore();
-
   const { id } = route.params;
   const [gender, setGender] = useState(null);
   const [isOpen, setisOpen] = useState(false);
@@ -34,7 +33,11 @@ const SignupContinue = ({ navigation, route }) => {
     { label: "13", value: "13" },
     { label: "14", value: "14" },
   ];
-
+  useEffect(() => {
+    navigation.addListener("beforeRemove", (event) => {
+      event.preventDefault();
+    });
+  }, [navigation]);
   const handleSelection = (selectedGender) => {
     setGender(selectedGender);
   };

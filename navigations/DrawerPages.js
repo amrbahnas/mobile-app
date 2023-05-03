@@ -1,10 +1,11 @@
+import { useEffect } from "react";
 import { createDrawerNavigator } from "@react-navigation/drawer";
 import { Entypo } from "@expo/vector-icons";
 import UserPages from "./userPages";
 import DrawerContent from "./DrawerContent";
+
 const DrawerPages = () => {
   const Drawer = createDrawerNavigator();
-
   return (
     <Drawer.Navigator
       initialRouteName="Home"

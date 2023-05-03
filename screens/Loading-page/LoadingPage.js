@@ -1,9 +1,16 @@
 import { useEffect } from "react";
 import { View, Text, Image } from "react-native";
 import { ProgressBar } from "react-native-paper";
+
 import styles from "./style";
 const MyPage = ({ navigation, route }) => {
   const { text, target } = route.params;
+  useEffect(() => {
+    navigation.addListener("beforeRemove", (event) => {
+      event.preventDefault();
+    });
+  }, [navigation]);
+
   useEffect(() => {
     const timer = setTimeout(() => {
       navigation.navigate(target);
