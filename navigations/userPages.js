@@ -20,32 +20,28 @@ const UserPages = () => {
         name="choose-operation"
         component={ChooseOperation}
         options={() => ({
-          headerRight: () => <></>,
-          headerLeft: () => <></>,
+          headerShown: false,
         })}
       />
       <Stack.Screen
         name="choose-perception"
         component={ChoosePerception}
         options={() => ({
-          headerRight: () => <></>,
-          headerLeft: () => <></>,
+          headerShown: false,
         })}
       />
       <Stack.Screen
         name="diagnosis-start"
         component={DiagnosisStart}
         options={() => ({
-          headerRight: () => <></>,
-          headerLeft: () => <></>,
+          headerShown: false,
         })}
       />
       <Stack.Screen
         name="questions"
         component={Questions}
         options={() => ({
-          headerRight: () => <></>,
-          headerLeft: () => <></>,
+          headerShown: false,
         })}
       />
     </Stack.Navigator>

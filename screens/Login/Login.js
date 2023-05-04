@@ -24,13 +24,14 @@ import modelStore from "../../hooks/model";
 // styles
 import styles from "./style.js";
 export default Login = ({ navigation }) => {
-  const { setUser } = useStore();
+  const { setUser, setLogin } = useStore();
   const { setIsOpen } = modelStore();
   const [loading, setLoading] = useState(false);
   const [showPassword, setShowPassword] = useState(false);
 
   const handleLogin = ({ email, password }) => {
     setLoading(true);
+    Keyboard.dismiss();
     setIsOpen();
     signInWithEmailAndPassword(auth, email, password)
       .then((userCredentials) => {
@@ -41,10 +42,11 @@ export default Login = ({ navigation }) => {
             setUser(doc.data());
             setLoading(false);
             setIsOpen();
-            navigation.reset({
-              index: 0,
-              routes: [{ name: "drawer-pages" }],
-            });
+            setLogin(true);
+            // navigation.reset({
+            //   index: 0,
+            //   routes: [{ name: "drawer-pages" }],
+            // });
           } else {
             setIsOpen();
             navigation.navigate("signup-continue", {

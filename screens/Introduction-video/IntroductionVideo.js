@@ -5,7 +5,11 @@ import { MaterialIcons } from "@expo/vector-icons";
 import { Button, Text, TouchableOpacity, View } from "react-native";
 import styles from "./style";
 import { useNavigation } from "@react-navigation/native";
+import useStore from "../../hooks/userInfo";
+
 export default IntroductionVideo = () => {
+  const { setLogin } = useStore();
+
   const video = useRef(null);
   const navigation = useNavigation();
   useEffect(() => {
@@ -13,36 +17,18 @@ export default IntroductionVideo = () => {
       event.preventDefault();
     });
   }, [navigation]);
+
   useEffect(() => {
     ScreenOrientation.lockAsync(
       ScreenOrientation.OrientationLock.LANDSCAPE_LEFT
     );
-  }, []);
+  }, [navigation]);
 
   const handleClick = () => {
-    video.current.pauseAsync();
+    setLogin(true);
     ScreenOrientation.lockAsync(ScreenOrientation.OrientationLock.PORTRAIT);
-    // navigation.reset({
-    //   index: 0,
-    //   routes: [{ name: "drawer-pages" }],
-    // });
-    // navigation.reset({
-    //   routes: [{ name: "drawer-pages" }],
-    // });
+    // video.current.pauseAsync();
     // navigation.navigate("drawer-pages");
-
-    navigation.reset({
-      index: 0,
-      routes: [
-        {
-          name: "drawer-pages",
-          state: {
-            type: "drawer",
-            routes: [{ name: "drawer-pages" }], // Replace 'Home' with the name of the screen to navigate to
-          },
-        },
-      ],
-    });
   };
   return (
     <View style={styles.container}>

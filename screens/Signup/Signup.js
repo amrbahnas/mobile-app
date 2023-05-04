@@ -41,6 +41,7 @@ export default Signup = ({ navigation }) => {
 
   const handleSignup = (values) => {
     setloading(true);
+    Keyboard.dismiss();
     setIsOpen();
     createUserWithEmailAndPassword(auth, values.email, values.password)
       .then((userCredentials) => {

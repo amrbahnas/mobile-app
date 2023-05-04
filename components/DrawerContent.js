@@ -4,31 +4,23 @@ import { getAuth, signOut } from "firebase/auth";
 import {
   DrawerContentScrollView,
   DrawerItemList,
-  DrawerItem,
 } from "@react-navigation/drawer";
 import { AntDesign } from "@expo/vector-icons";
 import { FontAwesome } from "@expo/vector-icons";
 import useStore from "../hooks/userInfo";
-import { useNavigation } from "@react-navigation/native";
 export default DrawerContent = (props) => {
-  const [isOpen, setIsOpen] = useState(false);
+  const [isOpen, setIsOpen] = useState(true);
   const {
     user: { name, email, gender, age },
+    setLogin,
   } = useStore();
-  const navigation = useNavigation();
-  const signOutHandler = async (props) => {
+  const signOutHandler = () => {
     const auth = getAuth();
-    // sign out the current user
     signOut(auth)
       .then(() => {
-        // Sign-out successful.
-        navigation.reset({
-          index: 0,
-          routes: [{ name: "login" }],
-        });
+        setLogin(false);
       })
       .catch((error) => {
-        // An error happened.
         console.log("Error:", error);
       });
   };
@@ -53,25 +45,25 @@ export default DrawerContent = (props) => {
           }}
           style={styles.menuControl}
         >
-          <Text style={styles.email}>{email}</Text>
           {!isOpen ? (
-            <AntDesign name="caretright" size={13} color="#7a7a7a" />
+            <AntDesign name="caretleft" size={13} color="#7a7a7a" />
           ) : (
             <AntDesign name="caretdown" size={13} color="#7a7a7a" />
           )}
+          <Text style={styles.email}>{email}</Text>
         </TouchableOpacity>
         {isOpen && (
           <View style={styles.menu}>
             <TouchableOpacity style={styles.option}>
+              <Text style={styles.optionText}>الصفحة الشخصية</Text>
               <AntDesign name="profile" size={18} color="black" />
-              <Text style={styles.optionText}>Profile</Text>
             </TouchableOpacity>
             <TouchableOpacity
               style={[styles.option, styles.lastOption]}
               onPress={signOutHandler}
             >
+              <Text style={styles.optionText}>تسجيل الخروج</Text>
               <FontAwesome name="sign-out" size={18} color="black" />
-              <Text style={styles.optionText}>SignUp</Text>
             </TouchableOpacity>
           </View>
         )}
@@ -100,6 +92,7 @@ const styles = StyleSheet.create({
     borderRadius: 50,
     borderWidth: 2,
     borderColor: "#e3e3e3",
+    alignSelf: "center",
   },
   image: {
     width: "100%",
@@ -109,6 +102,7 @@ const styles = StyleSheet.create({
     textTransform: "capitalize",
     fontWeight: "bold",
     fontSize: 20,
+    alignSelf: "flex-end",
   },
   email: {
     color: "#7a7a7a",
@@ -116,6 +110,8 @@ const styles = StyleSheet.create({
   menuControl: {
     flexDirection: "row",
     alignItems: "center",
+    alignSelf: "flex-end",
+
     gap: 8,
   },
   menu: {
@@ -125,6 +121,7 @@ const styles = StyleSheet.create({
   option: {
     flexDirection: "row",
     alignItems: "center",
+    justifyContent: "flex-end",
     gap: 5,
     paddingHorizontal: 5,
     paddingVertical: 15,

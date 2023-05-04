@@ -16,7 +16,7 @@ import useStore from "../../hooks/userInfo";
 import modelStore from "../../hooks/model";
 
 const SignupContinue = ({ navigation, route }) => {
-  const { setUser } = useStore();
+  const { setUser, setLogin } = useStore();
   const { setIsOpen } = modelStore();
   const { id } = route.params;
   const [gender, setGender] = useState(null);
