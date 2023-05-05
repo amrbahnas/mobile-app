@@ -17,7 +17,7 @@ export default styles = StyleSheet.create({
   },
 });
 
-
+// https://expo.dev/accounts/elbahnsawy/projects/mobile-project/builds/f1bdb1d1-fa85-4089-8cc5-3937978d8b80#run-gradlew
 
 // IntroductionVideo reset navigate
 

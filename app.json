@@ -1,6 +1,6 @@
 {
   "expo": {
-    "name": "mobile-project",
+    "name": "waey",
     "slug": "mobile-project",
     "version": "1.0.0",
     "orientation": "portrait",
@@ -18,11 +18,11 @@
       "supportsTablet": true
     },
     "android": {
+      "package": "com.elbahnsawy.activity",
       "adaptiveIcon": {
         "foregroundImage": "./assets/adaptive-icon.png",
         "backgroundColor": "#ffffff"
-      },
-      "package": "com.elbahnsawy.mobileproject"
+      }
     },
     "web": {
       "favicon": "./assets/favicon.png"
