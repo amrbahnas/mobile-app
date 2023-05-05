@@ -27,7 +27,7 @@ const LoadingPage = ({ navigation, route }) => {
       <View style={styles.loadingContainer}>
         <View style={styles.imageContainer}>
           <Image
-            source={require(".../../assets/images/welcome-logo.png")}
+            source={require("../../assets/images/welcome-logo.png")}
             style={styles.image}
           />
           <ProgressBar

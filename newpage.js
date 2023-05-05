@@ -33,3 +33,10 @@ export default styles = StyleSheet.create({
       event.preventDefault();
     });
   }, [navigation]);
+
+
+
+
+
+
+  //  eas build -p android --profile preview
