@@ -2,10 +2,13 @@ import React, { useState, useEffect, useRef } from "react";
 import { View, Text, TouchableOpacity, ScrollView } from "react-native";
 import styles from "./style";
 import { data1, data2, data3, data4, data5, data6 } from "./data";
-
+import userInfo from "../../hooks/userInfo";
 const Questions = ({ navigation, route }) => {
   const { selectedboxs } = route.params;
-  const age = 7;
+  const {
+    user: { age },
+  } = userInfo();
+  // const age = 7;
   const [questions, setquestions] = useState([]);
   const [currentQuestionIndex, setCurrentQuestionIndex] = useState(0);
   const [answers, setAnswers] = useState([]);
@@ -15,16 +18,16 @@ const Questions = ({ navigation, route }) => {
 
   useEffect(() => {
     const data = [];
-    if (age > 8) {
-      if (selectedboxs.includes("Visual")) data.push(...data1);
+    if (parseInt(age) > 8) {
+      if (selectedboxs.includes("visual")) data.push(...data1);
       if (selectedboxs.includes("audio")) data.push(...data2);
-      if (selectedboxs.includes("Sensual")) data.push(...data3);
+      if (selectedboxs.includes("sensual")) data.push(...data3);
     } else {
-      if (selectedboxs.includes("Visual")) data.push(...data4);
+      if (selectedboxs.includes("visual")) data.push(...data4);
       if (selectedboxs.includes("audio")) data.push(...data5);
-      if (selectedboxs.includes("Sensual")) data.push(...data6);
+      if (selectedboxs.includes("sensual")) data.push(...data6);
     }
-    setquestions(data);
+    setquestions(data.map((item, index) => ({ ...item, id: index + 1 })));
     setAnswers(Array(data.length).fill(null));
   }, []);
 
@@ -37,7 +40,6 @@ const Questions = ({ navigation, route }) => {
         return;
       }
     }
-    console.log(answers, "Answer");
     setCurrentQuestionsAnswered(true);
   }, [currentQuestionIndex, answers]);
 
@@ -71,7 +73,6 @@ const Questions = ({ navigation, route }) => {
     setCurrentQuestionsAnswered(() => {
       const startIndex = currentQuestionIndex * 3;
       const endIndex = Math.min(startIndex + 2, questions.length);
-      console.log(answers, "start");
       for (let i = startIndex; i < endIndex; i++) {
         if (answers[i] === null) {
           return false;
@@ -169,12 +170,35 @@ const Questions = ({ navigation, route }) => {
   };
 
   const submitAnswers = () => {
-    console.log(answers);
-    // Handle submitting answers to server or
-    const result = answers.reduce((a, b) => a + b);
+    if (!age || !selectedboxs || selectedboxs.length === 0) {
+      console.error("Invalid input: age and selectedboxs are required");
+      return;
+    }
+
+    const result = { visual: 0, audio: 0, sensual: 0 };
+    const sliceSize = parseInt(age) > 8 ? 10 : 0;
+
+    result[selectedboxs[0]] = answers
+      .slice(0, 10 + sliceSize)
+      .reduce((a, b) => a + b, 0);
+
+    if (selectedboxs.length >= 2) {
+      result[selectedboxs[1]] = answers
+        .slice(10 + sliceSize, 20 + sliceSize)
+        .reduce((a, b) => a + b, 0);
+    }
+
+    if (selectedboxs.length === 3) {
+      result[selectedboxs[2]] = answers
+        .slice(20 + sliceSize)
+        .reduce((a, b) => a + b, 0);
+    }
+
     navigation.navigate("loading-page", {
       text: "جاري تحليل بياناتك ومن ثمه إعداد البرنامج المناسب لطفلك",
-      target: "loading-page",
+      target: "result-page",
+      result,
+      selectedboxs,
     });
   };
 

@@ -3,8 +3,8 @@ import { View, Text, Image } from "react-native";
 import { ProgressBar } from "react-native-paper";
 
 import styles from "./style";
-const MyPage = ({ navigation, route }) => {
-  const { text, target } = route.params;
+const LoadingPage = ({ navigation, route }) => {
+  const { text, target, result, selectedboxs } = route.params;
   useEffect(() => {
     navigation.addListener("beforeRemove", (event) => {
       event.preventDefault();
@@ -13,7 +13,9 @@ const MyPage = ({ navigation, route }) => {
 
   useEffect(() => {
     const timer = setTimeout(() => {
-      navigation.navigate(target);
+      if (target === "result-page") {
+        navigation.navigate("result-page", { result, selectedboxs });
+      } else navigation.navigate(target);
     }, 3000);
     return () => {
       clearInterval(timer);
@@ -41,4 +43,4 @@ const MyPage = ({ navigation, route }) => {
   );
 };
 
-export default MyPage;
+export default LoadingPage;

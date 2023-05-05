@@ -24,11 +24,11 @@ const ChoosePerception = ({ navigation, route }) => {
   const nextHandler = () => {
     if (isChecked1 || isChecked2 || isChecked3) {
       const selectedboxs = [];
-      if (isChecked1) selectedboxs.push("Visual");
+      if (isChecked1) selectedboxs.push("visual");
       if (isChecked2) selectedboxs.push("audio");
-      if (isChecked3) selectedboxs.push("Sensual");
+      if (isChecked3) selectedboxs.push("sensual");
       navigation.navigate("diagnosis-start", {
-        selectedboxs: selectedboxs.join(""),
+        selectedboxs: selectedboxs,
       });
     }
   };
