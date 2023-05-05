@@ -7,13 +7,13 @@ import {
   ImageBackground,
   Alert,
 } from "react-native";
-import DropDownPicker from "react-native-dropdown-picker";
 // firebase
 import { doc, getDoc, updateDoc } from "firebase/firestore";
 import { db } from "../../firebase/firebase";
 // global state
 import useStore from "../../hooks/userInfo";
 import modelStore from "../../hooks/model";
+import Dropdown from "../../components/Dropdown";
 
 const SignupContinue = ({ navigation, route }) => {
   const { setUser, setLogin } = useStore();
@@ -94,55 +94,7 @@ const SignupContinue = ({ navigation, route }) => {
       </View>
       <View style={styles.bottom}>
         <Text style={styles.title}>تحديد العمر</Text>
-        <View style={styles.dropdownGender}>
-          <DropDownPicker
-            items={age}
-            open={isOpen}
-            setOpen={() => setisOpen(!isOpen)}
-            value={selectedAge}
-            setValue={(value) => setselectedAge(value)}
-            // dropDownMaxHeight={150}
-            maxHeight={200}
-            placeholder="اختر العمر"
-            placeholderStyle={{ fontSize: 15, textAlign: "center" }}
-            showTickIcon={false}
-            closeOnBackPressed={true}
-            // disableBorderRadius={false}
-            style={{
-              backgroundColor: "#d9d9d9",
-              borderWidth: 0,
-              zIndex: 100,
-            }}
-            dropDownContainerStyle={{
-              borderWidth: 0,
-              elevation: 4,
-              shadowColor: "#000",
-            }}
-            textStyle={{
-              fontSize: 18,
-            }}
-            arrowIconStyle={{
-              position: "absolute",
-              width: 20,
-              height: 20,
-              top: -10,
-              right: 280,
-            }}
-            listItemLabelStyle={{
-              // width: "100%",
-              textAlign: "right",
-            }}
-            selectedItemContainerStyle={{
-              backgroundColor: "#7636ff",
-            }}
-            selectedItemLabelStyle={{
-              color: "#fff",
-            }}
-            labelStyle={{
-              textAlign: "right",
-            }}
-          />
-        </View>
+        <Dropdown setselectedAge={setselectedAge} />
         <TouchableOpacity style={styles.button} onPress={handleSubmit}>
           <Text style={styles.buttonText}>الاستمرار</Text>
         </TouchableOpacity>
