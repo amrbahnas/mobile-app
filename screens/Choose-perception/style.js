@@ -6,12 +6,20 @@ export default styles = StyleSheet.create({
     justifyContent: "center",
     marginHorizontal: 20,
   },
+  wrapper: {
+    width: "100%",
+    height: "100%",
+    alignItems: "center",
+    justifyContent: "center",
+    marginTop: -50,
+    gap: 100,
+  },
   title: {
+    color: "black",
     width: "100%",
     textAlign: "center",
-    position: "absolute",
-    fontSize: 21,
-    top: "10%",
+    fontSize: 22,
+    fontWeight: "bold",
   },
   box: {
     width: "100%",
@@ -19,8 +27,8 @@ export default styles = StyleSheet.create({
     borderWidth: 1,
     borderColor: "#95959580",
     borderRadius: 5,
-    marginVertical: 45,
     backgroundColor: "#fff",
+    marginVertical: 10,
   },
   row: {
     flex: 1,
@@ -39,8 +47,8 @@ export default styles = StyleSheet.create({
   },
   text: {
     marginLeft: 10,
-    fontSize: 16,
-    fontWeight: "bold",
+    fontSize: 18,
+    color: "#191919",
   },
   icon: {
     marginLeft: 10,

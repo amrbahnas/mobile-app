@@ -29,7 +29,7 @@ export default styles = StyleSheet.create({
     marginVertical: 2,
   },
   submitButton: {
-    backgroundColor: "#7636ff",
+    backgroundColor: "#ed7820",
     borderRadius: 30,
     padding: 15,
     elevation: 3, // add shadow on Android

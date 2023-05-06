@@ -47,7 +47,7 @@ const Dropdown = ({ setselectedAge: setAge }) => {
       {isOpen && (
         <View style={styles.dropdownContainer}>
           <ScrollView style={{ maxHeight: 200 }}>
-            {age.slice(0, 5).map((item) => (
+            {age.map((item) => (
               <TouchableOpacity
                 key={item.value}
                 onPress={() => handleSelect(item.value)}

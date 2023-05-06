@@ -81,14 +81,14 @@ const Questions = ({ navigation, route }) => {
       return true;
     });
   };
-
+  console.log(age);
   const renderQuestion = (question) => {
     return (
       <View key={question.id} style={styles.singleQuestion}>
         <Text style={styles.questionText}>{question.text}</Text>
         <View
           style={
-            age > 9
+            parseInt(age) < 8
               ? { justifyContent: "space-between", flexDirection: "row" }
               : { justifyContent: "flex-end", gap: 60, flexDirection: "row" }
           }
@@ -203,10 +203,10 @@ const Questions = ({ navigation, route }) => {
   };
 
   return (
-    <ScrollView ref={scrollViewRef}>
+    <ScrollView ref={scrollViewRef} contentContainerStyle={{ flex: 1 }}>
       <View style={styles.container}>
         {renderProgressBar()}
-        {renderQuestions()}
+        <View style={styles.questionsContainer}>{renderQuestions()}</View>
         {renderButtons()}
       </View>
     </ScrollView>

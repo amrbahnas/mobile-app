@@ -8,10 +8,9 @@ export default styles = StyleSheet.create({
     marginHorizontal: 20,
   },
   loadingContainer: {
-    position: "absolute",
-    justifyContent: "center",
+    justifyContent: "flex-start",
     alignItems: "center",
-    marginHorizontal: 20,
+    marginTop: -200,
   },
   loadingText: {
     fontSize: 18,

@@ -11,14 +11,12 @@ export default function App() {
   const { isOpen } = modelStore();
   return (
     <>
-      <SafeAreaView style={{ flex: 1 }}>
-        <PaperProvider>
-          <NavigationContainer>
-            {login ? <UserNavigator /> : <AuthNavigator />}
-            {isOpen && <Loading />}
-          </NavigationContainer>
-        </PaperProvider>
-      </SafeAreaView>
+      <PaperProvider>
+        <NavigationContainer>
+          {login ? <UserNavigator /> : <AuthNavigator />}
+          {isOpen && <Loading />}
+        </NavigationContainer>
+      </PaperProvider>
     </>
   );
 }

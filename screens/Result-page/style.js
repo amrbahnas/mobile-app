@@ -10,7 +10,9 @@ export default styles = StyleSheet.create({
     width: "100%",
     textAlign: "center",
     position: "absolute",
+    fontWeight: "bold",
     fontSize: 21,
+    color: "black",
     top: "10%",
   },
   center: {
@@ -33,7 +35,7 @@ export default styles = StyleSheet.create({
     flexDirection: "row",
     alignItems: "center",
     justifyContent: "center",
-    padding: 20,
+    padding: 16,
     gap: 10,
     borderBottomWidth: 1,
     borderBottomColor: "#95959580",
@@ -44,8 +46,8 @@ export default styles = StyleSheet.create({
     justifyContent: "flex-start",
   },
   text: {
-    fontSize: 16,
-    fontWeight: "bold",
+    fontSize: 20,
+    color: "#191919",
     textAlign: "right",
   },
   icon: {

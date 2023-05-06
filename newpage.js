@@ -40,3 +40,4 @@ export default styles = StyleSheet.create({
 
 
   //  eas build -p android --profile preview
+// expo start --tunnel

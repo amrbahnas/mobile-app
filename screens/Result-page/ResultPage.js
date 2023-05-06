@@ -8,7 +8,11 @@ const ResultPage = ({ navigation, route }) => {
   const {
     user: { age },
   } = useStore();
-
+  useEffect(() => {
+    navigation.addListener("beforeRemove", (event) => {
+      event.preventDefault();
+    });
+  }, [navigation]);
   const [resultReview, setResultReview] = useState({
     visual: {
       status: false,
@@ -82,9 +86,7 @@ const ResultPage = ({ navigation, route }) => {
   // % [0-24, 24-43, 44-60, 61-100]
 
   const nextHandler = () => {
-    navigation.navigate("diagnosis-start", {
-      selectedboxs: selectedboxs,
-    });
+    navigation.push("choose-operation");
   };
 
   return (

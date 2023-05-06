@@ -2,17 +2,26 @@ import { StyleSheet } from "react-native";
 export default styles = StyleSheet.create({
   container: {
     flex: 1,
-    justifyContent: "flex-start",
+    justifyContent: "center",
     alignItems: "center",
     marginHorizontal: 20,
-    marginVertical: 40,
+  },
+
+  questionsContainer: {
+    flex: 1,
+    width: "100%",
+    alignItems: "center",
+    justifyContent: "center",
+    gap: 20,
   },
   singleQuestion: {
     width: "100%",
+    flex: 1,
     backgroundColor: "#fff",
     padding: 10,
     borderRadius: 10,
-    marginBottom: 20,
+    justifyContent: "center",
+    alignItems: "flex-end",
   },
   questionText: {
     fontSize: 16,
@@ -57,10 +66,11 @@ export default styles = StyleSheet.create({
     borderRadius: 5,
   },
   buttonsContainer: {
+    marginVertical: 60,
     flexDirection: "row",
     justifyContent: "center",
     gap: 60,
-    marginTop: 10,
+
     width: "100%",
   },
   button: {

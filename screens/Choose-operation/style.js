@@ -2,13 +2,20 @@ import { StyleSheet } from "react-native";
 export default styles = StyleSheet.create({
   container: {
     flex: 1,
-    justifyContent: "flex-start",
+    justifyContent: "center",
     alignItems: "center",
+  },
+  wrapper: {
+    width: "100%",
+    height: "100%",
+    alignItems: "center",
+    justifyContent: "center",
+    marginTop: -100,
+    gap: 10,
   },
   slider: {
     height: 400,
     marginBottom: 30,
-    marginTop: 100,
   },
   slide: {
     flex: 1,

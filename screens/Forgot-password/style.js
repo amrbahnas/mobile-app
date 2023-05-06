@@ -10,7 +10,7 @@ export default styles = StyleSheet.create({
   },
   text: {
     marginBottom: 20,
-    width:"100%"
+    width: "100%",
   },
   input: {
     borderBottomWidth: 1,
@@ -23,7 +23,7 @@ export default styles = StyleSheet.create({
     marginBottom: 20,
   },
   button: {
-    backgroundColor: "#7636ff",
+    backgroundColor: "#ed7820",
     borderRadius: 30,
     padding: 10,
     elevation: 3, // add shadow on Android
