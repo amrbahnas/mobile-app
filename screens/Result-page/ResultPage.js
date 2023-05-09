@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import { View, TouchableOpacity, Image } from "react-native";
+import { View, TouchableOpacity, Image, Alert } from "react-native";
 import { Checkbox, Text } from "react-native-paper";
 import styles from "./style";
 import useStore from "../../hooks/userInfo";
@@ -8,11 +8,7 @@ const ResultPage = ({ navigation, route }) => {
   const {
     user: { age },
   } = useStore();
-  useEffect(() => {
-    navigation.addListener("beforeRemove", (event) => {
-      event.preventDefault();
-    });
-  }, [navigation]);
+
   const [resultReview, setResultReview] = useState({
     visual: {
       status: false,
@@ -86,7 +82,14 @@ const ResultPage = ({ navigation, route }) => {
   // % [0-24, 24-43, 44-60, 61-100]
 
   const nextHandler = () => {
-    navigation.push("choose-operation");
+    Alert.alert(
+      "تم الارسال",
+      "تم ارسال لينك اعادة تعيين كلمةالمرور انظر صندوق البريد",
+      [
+        { text: "Cancel", style: "cancel" },
+        { text: "OK", onPress: () => navigation.navigate("choose-operation") },
+      ]
+    );
   };
 
   return (

@@ -4,7 +4,7 @@ export default styles = StyleSheet.create({
     flex: 1,
     justifyContent: "center",
     alignItems: "center",
-    marginHorizontal: 20,
+    marginHorizontal: 22,
   },
 
   questionsContainer: {
@@ -17,6 +17,8 @@ export default styles = StyleSheet.create({
   singleQuestion: {
     width: "100%",
     flex: 1,
+    minHeight: 180,
+    alignSelf: "stretch",
     backgroundColor: "#fff",
     padding: 10,
     borderRadius: 10,

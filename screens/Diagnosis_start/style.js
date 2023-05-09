@@ -2,37 +2,35 @@ import { StyleSheet } from "react-native";
 export default styles = StyleSheet.create({
   container: {
     flex: 1,
-    alignItems: "center",
-    justifyContent: "center",
+    // backgroundColor: "#fff",
     marginHorizontal: 20,
   },
-  wrapper: {
-    width: "100%",
-    height: "100%",
-    alignItems: "center",
-    justifyContent: "center",
-    marginTop: -50,
-  },
-  titleWrapper: {
-    width: "100%",
-  },
   title: {
-    width: "100%",
-    textAlign: "center",
     fontSize: 24,
     fontWeight: "bold",
-  },
-  body: {
-    width: "100%",
     textAlign: "center",
-    color: "#959595",
-    fontSize: 19,
+    color: "#000",
   },
   image: {
-    marginLeft: 60,
-    width: 250,
-    marginTop: 100,
+    marginLeft: 30,
+    alignSelf: "center",
+    // backgroundColor: "#fff",
+    width: 100,
+    height: 100,
+    marginTop: 50,
     marginBottom: 50,
+  },
+  noteContainer: {
+    borderWidth: 1,
+    borderColor: "#ccc",
+    borderRadius: 4,
+    padding: 16,
+    backgroundColor: "#fff",
+    borderRadius: 10,
+  },
+  note: {
+    fontSize: 16,
+    marginBottom: 8,
   },
   button: {
     width: "100%",

@@ -203,7 +203,7 @@ const Questions = ({ navigation, route }) => {
   };
 
   return (
-    <ScrollView ref={scrollViewRef} contentContainerStyle={{ flex: 1 }}>
+    <ScrollView ref={scrollViewRef} contentContainerStyle={{}}>
       <View style={styles.container}>
         {renderProgressBar()}
         <View style={styles.questionsContainer}>{renderQuestions()}</View>

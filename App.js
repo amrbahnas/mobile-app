@@ -1,4 +1,4 @@
-import { Text, StyleSheet, SafeAreaView } from "react-native";
+import { Text, StyleSheet, SafeAreaView, ScrollView } from "react-native";
 import { Provider as PaperProvider } from "react-native-paper";
 import { NavigationContainer } from "@react-navigation/native";
 import AuthNavigator from "./navigations/AuthNavigator";
