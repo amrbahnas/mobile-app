@@ -8,7 +8,9 @@ import {
 import { AntDesign } from "@expo/vector-icons";
 import { FontAwesome } from "@expo/vector-icons";
 import useStore from "../hooks/userInfo";
+import { useNavigation } from "@react-navigation/native";
 export default DrawerContent = (props) => {
+  const navigator = useNavigation();
   const [isOpen, setIsOpen] = useState(true);
   const {
     user: { name, email, gender, age },
@@ -54,8 +56,18 @@ export default DrawerContent = (props) => {
         </TouchableOpacity>
         {isOpen && (
           <View style={styles.menu}>
-            <TouchableOpacity style={styles.option}>
-              <Text style={styles.optionText}>الصفحة الشخصية</Text>
+            <TouchableOpacity
+              style={styles.option}
+              onPress={() => navigator.navigate("choose-operation")}
+            >
+              <Text style={styles.optionText}>الصفحة الرئيسية</Text>
+              <AntDesign name="home" size={18} color="black" />
+            </TouchableOpacity>
+            <TouchableOpacity
+              style={styles.option}
+              onPress={() => navigator.navigate("profile")}
+            >
+              <Text style={styles.optionText}>الحساب</Text>
               <AntDesign name="profile" size={18} color="black" />
             </TouchableOpacity>
             <TouchableOpacity

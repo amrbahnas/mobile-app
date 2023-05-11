@@ -1,9 +1,27 @@
 import React, { useState, useEffect, useRef } from "react";
-import { View, Text, TouchableOpacity, ScrollView } from "react-native";
+import { View, Text, TouchableOpacity, ScrollView, Alert } from "react-native";
 import styles from "./style";
 import { data1, data2, data3, data4, data5, data6 } from "./data";
 import userInfo from "../../hooks/userInfo";
 const Questions = ({ navigation, route }) => {
+  useEffect(() => {
+    const unsubscribe = navigation.addListener("beforeRemove", (event) => {
+      event?.preventDefault();
+      Alert.alert("Warning", "Are you sure you want to leave the exam?", [
+        {
+          text: "Stay",
+          style: "cancel",
+          onPress: () => console.log("Stay pressed"),
+        },
+        {
+          text: "Leave",
+          style: "destructive",
+          onPress: () => navigation.navigate("choose-operation"),
+        },
+      ]);
+    });
+    return unsubscribe;
+  }, [navigation]);
   const { selectedboxs } = route.params;
   const {
     user: { age },
@@ -87,11 +105,12 @@ const Questions = ({ navigation, route }) => {
       <View key={question.id} style={styles.singleQuestion}>
         <Text style={styles.questionText}>{question.text}</Text>
         <View
-          style={
-            parseInt(age) < 8
-              ? { justifyContent: "space-between", flexDirection: "row" }
-              : { justifyContent: "flex-end", gap: 60, flexDirection: "row" }
-          }
+          style={[
+            styles.choices,
+            age > 8
+              ? { justifyContent: "space-between" }
+              : { justifyContent: "flex-end", gap: 60 },
+          ]}
         >
           {question.choices?.map((choice, index) => (
             <TouchableOpacity

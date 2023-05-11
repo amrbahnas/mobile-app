@@ -1,12 +1,14 @@
 import React, { useState, useEffect } from "react";
 import { View, TouchableOpacity, Image, Alert } from "react-native";
 import { Checkbox, Text } from "react-native-paper";
+import { doc, updateDoc } from "firebase/firestore";
+import { db } from "../../firebase/firebase";
 import styles from "./style";
 import useStore from "../../hooks/userInfo";
 const ResultPage = ({ navigation, route }) => {
-  const { result, selectedboxs } = route.params;
+  const { result, selectedboxs = [] } = route.params;
   const {
-    user: { age },
+    user: { id, age },
   } = useStore();
 
   const [resultReview, setResultReview] = useState({
@@ -70,26 +72,25 @@ const ResultPage = ({ navigation, route }) => {
       sensual.status = result.sensual > MIN_SCORE_FOR_MILD_DIFFICULTY;
       sensual.text = calcDifficulty(result.sensual);
     }
-
-    setResultReview({ visual, audio, sensual });
+    const final = { visual, audio, sensual };
+    setResultReview(final);
+    return final;
   };
 
   useEffect(() => {
-    calcResult();
+    const result = calcResult();
+    console.log(id);
+    let docRef = doc(db, "users", id);
+    updateDoc(docRef, {
+      diagnosis: result,
+    });
   }, []);
 
   // [0-19.2, 19.2-34.4, 35-48, 49-80]
   // % [0-24, 24-43, 44-60, 61-100]
 
   const nextHandler = () => {
-    Alert.alert(
-      "تم الارسال",
-      "تم ارسال لينك اعادة تعيين كلمةالمرور انظر صندوق البريد",
-      [
-        { text: "Cancel", style: "cancel" },
-        { text: "OK", onPress: () => navigation.navigate("choose-operation") },
-      ]
-    );
+    navigation.navigate("Home");
   };
 
   return (
@@ -99,7 +100,7 @@ const ResultPage = ({ navigation, route }) => {
       </Text>
       <View style={styles.center}>
         <View style={styles.box}>
-          {selectedboxs.includes("visual") && (
+          {selectedboxs?.includes("visual") && (
             <View style={styles.row}>
               <View style={styles.textContent}>
                 <Text style={styles.text}>
@@ -121,7 +122,7 @@ const ResultPage = ({ navigation, route }) => {
               />
             </View>
           )}
-          {selectedboxs.includes("audio") && (
+          {selectedboxs?.includes("audio") && (
             <View style={styles.row}>
               <View style={styles.textContent}>
                 <Text style={styles.text}>
@@ -143,7 +144,7 @@ const ResultPage = ({ navigation, route }) => {
               />
             </View>
           )}
-          {selectedboxs.includes("sensual") && (
+          {selectedboxs?.includes("sensual") && (
             <View style={styles.row}>
               <View style={styles.textContent}>
                 <Text style={styles.text}>

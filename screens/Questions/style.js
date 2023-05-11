@@ -34,6 +34,10 @@ export default styles = StyleSheet.create({
     alignItems: "center",
     marginVertical: 5,
   },
+  choices: {
+    width: "100%",
+    flexDirection: "row",
+  },
 
   radioCircle: {
     height: 20,

@@ -39,7 +39,7 @@ export default Login = ({ navigation }) => {
         const docRef = doc(db, "users", user.uid);
         getDoc(docRef).then((doc) => {
           if (doc.data().age) {
-            setUser(doc.data());
+            setUser({ ...doc.data(), id: user.uid });
             setLoading(false);
             setIsOpen();
             setLogin(true);
