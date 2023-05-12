@@ -13,6 +13,8 @@ import { doc, updateDoc } from "firebase/firestore";
 import { db } from "../../firebase/firebase";
 import userInfo from "../../hooks/userInfo";
 import modelStore from "./../../hooks/model";
+import Dropdown from "../../components/Dropdown";
+import ageList from "../../utils/age";
 const ProfilePage = () => {
   const { setIsOpen } = modelStore();
   const { user, setUser } = userInfo();
@@ -80,38 +82,30 @@ const ProfilePage = () => {
             onChangeText={(text) => setupdatedName(text)}
             style={styles.input}
           />
-          <TextInput
+          <Dropdown
             disabled={!isEditing}
-            mode="Flat"
-            label="Email"
-            value={updatedEmail}
-            textAlign="right"
-            style={styles.input}
-            labelProps={{ style: { left: 10, top: 8 } }}
-            onChangeText={(text) => setupdatedEmail(text)}
-          />
-          <TextInput
-            disabled={!isEditing}
-            mode="Flat"
-            label="Gender"
-            style={styles.input}
+            data={[
+              { label: "male", value: "male" },
+              { label: "female", value: "female" },
+            ]}
             value={updatedGender}
-            onChangeText={(text) => setUpdatedGender(text)}
+            setValue={(value) => {
+              setUpdatedGender(value);
+            }}
           />
-          <TextInput
+          <Dropdown
             disabled={!isEditing}
-            mode="Flat"
-            label="Age"
-            number
-            style={styles.input}
+            data={ageList}
             value={updatedAge}
-            onChangeText={(text) => setUpdatedAge(text)}
+            setValue={(value) => {
+              setUpdatedAge(value);
+            }}
           />
-          {/* <TouchableOpacity style={styles.editButton} onPress={edit}>
+          <TouchableOpacity style={styles.editButton} onPress={edit}>
             <Text style={styles.editButtonText}>
               {isEditing ? "Save" : "Edit"}
             </Text>
-          </TouchableOpacity> */}
+          </TouchableOpacity>
         </View>
       </View>
     </TouchableWithoutFeedback>

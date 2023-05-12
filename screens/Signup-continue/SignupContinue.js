@@ -1,5 +1,6 @@
 import { useState, useEffect } from "react";
 import styles from "./style";
+import ageList from "../../utils/age";
 import {
   View,
   Text,
@@ -83,7 +84,11 @@ const SignupContinue = ({ navigation, route }) => {
       </View>
       <View style={styles.bottom}>
         <Text style={styles.title}>تحديد العمر</Text>
-        <Dropdown setselectedAge={setselectedAge} />
+        <Dropdown
+          setvalue={(value) => setselectedAge(value)}
+          data={ageList}
+          value={selectedAge}
+        />
         <TouchableOpacity style={styles.button} onPress={handleSubmit}>
           <Text style={styles.buttonText}>الاستمرار</Text>
         </TouchableOpacity>
