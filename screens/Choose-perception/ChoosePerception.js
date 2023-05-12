@@ -35,55 +35,66 @@ const ChoosePerception = ({ navigation, route }) => {
 
   return (
     <View style={styles.container}>
-      <Text style={styles.title}>{title}</Text>
-      <View style={styles.box}>
-        <TouchableOpacity onPress={() => handleRowPress(1)} style={styles.row}>
-          <Checkbox.Android
-            status={isChecked1 ? "checked" : "unchecked"}
-            onPress={handleCheck1}
-            color="#14bbff"
-          />
-          <View style={styles.rightContent}>
-            <Text style={styles.text}>صعوبة الإدراك البصري</Text>
-            <Image
-              source={require("../../assets/icons/perception.png")}
-              style={styles.icon}
+      <View style={styles.wrapper}>
+        <Text style={styles.title}>{title}</Text>
+        <View style={styles.box}>
+          <TouchableOpacity
+            onPress={() => handleRowPress(1)}
+            style={styles.row}
+          >
+            <Checkbox.Android
+              status={isChecked1 ? "checked" : "unchecked"}
+              onPress={handleCheck1}
+              color="#14bbff"
             />
-          </View>
-        </TouchableOpacity>
-        <TouchableOpacity onPress={() => handleRowPress(2)} style={styles.row}>
-          <Checkbox.Android
-            status={isChecked2 ? "checked" : "unchecked"}
-            onPress={handleCheck2}
-            color="#14bbff"
-          />
-          <View style={styles.rightContent}>
-            <Text style={styles.text}>صعوبة الإدراك السمعي</Text>
-            <Image
-              source={require("../../assets/icons/ear.png")}
-              style={styles.icon}
+            <View style={styles.rightContent}>
+              <Text style={styles.text}>صعوبة الإدراك البصري</Text>
+              <Image
+                source={require("../../assets/icons/perception.png")}
+                style={styles.icon}
+              />
+            </View>
+          </TouchableOpacity>
+          <TouchableOpacity
+            onPress={() => handleRowPress(2)}
+            style={styles.row}
+          >
+            <Checkbox.Android
+              status={isChecked2 ? "checked" : "unchecked"}
+              onPress={handleCheck2}
+              color="#14bbff"
             />
-          </View>
-        </TouchableOpacity>
-        <TouchableOpacity onPress={() => handleRowPress(3)} style={styles.row}>
-          <Checkbox.Android
-            status={isChecked3 ? "checked" : "unchecked"}
-            onPress={handleCheck3}
-            color="#14bbff"
-          />
-          <View style={styles.rightContent}>
-            <Text style={styles.text}>صعوبة الإدراك الحس حركي</Text>
-            <Image
-              source={require("../../assets/icons/exercise.png")}
-              style={styles.icon}
+            <View style={styles.rightContent}>
+              <Text style={styles.text}>صعوبة الإدراك السمعي</Text>
+              <Image
+                source={require("../../assets/icons/ear.png")}
+                style={styles.icon}
+              />
+            </View>
+          </TouchableOpacity>
+          <TouchableOpacity
+            onPress={() => handleRowPress(3)}
+            style={styles.row}
+          >
+            <Checkbox.Android
+              status={isChecked3 ? "checked" : "unchecked"}
+              onPress={handleCheck3}
+              color="#14bbff"
             />
-          </View>
+            <View style={styles.rightContent}>
+              <Text style={styles.text}>صعوبة الإدراك الحس حركي</Text>
+              <Image
+                source={require("../../assets/icons/exercise.png")}
+                style={styles.icon}
+              />
+            </View>
+          </TouchableOpacity>
+        </View>
+
+        <TouchableOpacity style={styles.button} onPress={nextHandler}>
+          <Text style={styles.buttonText}>الاستمرار</Text>
         </TouchableOpacity>
       </View>
-
-      <TouchableOpacity style={styles.button} onPress={nextHandler}>
-        <Text style={styles.buttonText}>الاستمرار</Text>
-      </TouchableOpacity>
     </View>
   );
 };

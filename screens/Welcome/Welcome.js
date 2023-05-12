@@ -1,24 +1,13 @@
-import { useEffect, useRef } from "react";
-import { onAuthStateChanged } from "firebase/auth";
-import { auth } from "../../firebase/firebase";
+import { useRef } from "react";
 import { Text, TouchableOpacity, View, Image } from "react-native";
 import { Video, ResizeMode } from "expo-av";
-
+import useStore from "../../hooks/userInfo";
 import styles from "./style";
 export default Welcome = ({ navigation }) => {
   const video = useRef(null);
   const handleGetStarted = () => {
     navigation.navigate("login");
   };
-
-  // useEffect(() => {
-  //   const unsubscribe = onAuthStateChanged(auth, (user) => {
-  //     if (user) {
-  //       navigation.navigate("home");
-  //     }
-  //   });
-  //   return unsubscribe;
-  // }, []);
 
   return (
     <View style={styles.container}>

@@ -1,4 +1,4 @@
-import { Text, StyleSheet, SafeAreaView } from "react-native";
+import { Text, StyleSheet, SafeAreaView, ScrollView } from "react-native";
 import { Provider as PaperProvider } from "react-native-paper";
 import { NavigationContainer } from "@react-navigation/native";
 import AuthNavigator from "./navigations/AuthNavigator";
@@ -11,14 +11,12 @@ export default function App() {
   const { isOpen } = modelStore();
   return (
     <>
-      <SafeAreaView style={{ flex: 1 }}>
-        <PaperProvider>
-          <NavigationContainer>
-            {login ? <UserNavigator /> : <AuthNavigator />}
-            {isOpen && <Loading />}
-          </NavigationContainer>
-        </PaperProvider>
-      </SafeAreaView>
+      <PaperProvider>
+        <NavigationContainer>
+          {login ? <UserNavigator /> : <AuthNavigator />}
+          {isOpen && <Loading />}
+        </NavigationContainer>
+      </PaperProvider>
     </>
   );
 }

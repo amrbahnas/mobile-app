@@ -29,31 +29,37 @@ const ChooseOperation = ({ navigation }) => {
   };
 
   const navigateHandler = () => {
-    navigation.navigate("choose-perception", {
-      title: perceptionTypeTitles[currentIndex],
-    });
+    if (currentIndex === 1) {
+      navigation.navigate("choose-training");
+    } else {
+      navigation.navigate("choose-perception", {
+        title: perceptionTypeTitles[currentIndex],
+      });
+    }
   };
 
   return (
     <View style={styles.container}>
-      <View style={styles.slider}>
-        <Swiper
-          showsButtons={false}
-          loop={false}
-          onIndexChanged={onIndexChanged}
-          paginationStyle={styles.pagination}
-          activeDotColor="#14bbff"
-        >
-          {images.map((item, index) => (
-            <View key={index} style={styles.slide}>
-              <Image style={styles.image} source={item.source} />
-            </View>
-          ))}
-        </Swiper>
+      <View style={styles.wrapper}>
+        <View style={styles.slider}>
+          <Swiper
+            showsButtons={false}
+            loop={false}
+            onIndexChanged={onIndexChanged}
+            paginationStyle={styles.pagination}
+            activeDotColor="#14bbff"
+          >
+            {images.map((item, index) => (
+              <View key={index} style={styles.slide}>
+                <Image style={styles.image} source={item.source} />
+              </View>
+            ))}
+          </Swiper>
+        </View>
+        <TouchableOpacity style={styles.button} onPress={navigateHandler}>
+          <Text style={styles.buttonText}>{images[currentIndex]?.label}</Text>
+        </TouchableOpacity>
       </View>
-      <TouchableOpacity style={styles.button} onPress={navigateHandler}>
-        <Text style={styles.buttonText}>{images[currentIndex]?.label}</Text>
-      </TouchableOpacity>
     </View>
   );
 };

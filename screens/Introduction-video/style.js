@@ -25,7 +25,7 @@ export default styles = StyleSheet.create({
     paddingHorizontal: 10,
     paddingVertical: 5,
     height: 50,
-    backgroundColor: "#7636ff",
+    backgroundColor: "#ed7820",
     borderRadius: 5,
     alignItems: "center",
     justifyContent: "center",

@@ -8,34 +8,23 @@ import {
 } from "react-native";
 import Icon from "react-native-vector-icons/Feather";
 
-const age = [
-  { label: "6", value: "6" },
-  { label: "7", value: "7" },
-  { label: "8", value: "8" },
-  { label: "9", value: "9" },
-  { label: "10", value: "10" },
-  { label: "11", value: "11" },
-  { label: "12", value: "12" },
-  { label: "13", value: "13" },
-  { label: "14", value: "14" },
-];
-
-const Dropdown = ({ setselectedAge: setAge }) => {
-  const [selectedAge, setSelectedAge] = useState(age[0].value);
+const Dropdown = ({ setValue, data, value, disabled }) => {
+  const [selectedAge, setSelectedAge] = useState(value);
   const [isOpen, setIsOpen] = useState(false);
 
   const toggleOpen = () => {
+    if (disabled) return;
     setIsOpen(!isOpen);
   };
 
   const handleSelect = (itemValue) => {
     setSelectedAge(itemValue);
-    setAge(itemValue);
+    setValue(itemValue);
     setIsOpen(false);
   };
 
   return (
-    <View style={styles.container}>
+    <View style={[styles.container, disabled && styles.disabled]}>
       <TouchableOpacity onPress={toggleOpen} style={styles.selectedAge}>
         <Icon
           name={isOpen ? "chevron-up" : "chevron-down"}
@@ -47,7 +36,7 @@ const Dropdown = ({ setselectedAge: setAge }) => {
       {isOpen && (
         <View style={styles.dropdownContainer}>
           <ScrollView style={{ maxHeight: 200 }}>
-            {age.slice(0, 5).map((item) => (
+            {data.map((item) => (
               <TouchableOpacity
                 key={item.value}
                 onPress={() => handleSelect(item.value)}
@@ -68,6 +57,9 @@ const styles = StyleSheet.create({
     backgroundColor: "#d9d9d9",
     borderRadius: 5,
     overflow: "hidden",
+  },
+  disabled: {
+    opacity: 0.5,
   },
   selectedAge: {
     flexDirection: "row",

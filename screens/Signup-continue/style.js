@@ -38,8 +38,8 @@ export default styles = StyleSheet.create({
     overflow: "hidden",
   },
   selectedBox: {
-    backgroundColor: "#007bff",
-    borderColor: "#007bff",
+    backgroundColor: "#ed7820",
+    borderColor: "#ed7820",
   },
   image: {
     width: "100%",
@@ -50,7 +50,7 @@ export default styles = StyleSheet.create({
   },
 
   button: {
-    backgroundColor: "#7636ff",
+    backgroundColor: "#ed7820",
     borderRadius: 30,
     padding: 15,
     elevation: 3, // add shadow on Android

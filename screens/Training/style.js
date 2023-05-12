@@ -37,6 +37,7 @@ export default styles = StyleSheet.create({
   choices: {
     width: "100%",
     flexDirection: "row",
+    justifyContent: "space-between",
   },
 
   radioCircle: {
@@ -48,11 +49,10 @@ export default styles = StyleSheet.create({
     alignItems: "center",
     justifyContent: "center",
   },
-  selectedRadioCircle: {
-    height: 10,
-    width: 10,
-    borderRadius: 5,
-    backgroundColor: "#14bbff",
+  choiceIcon: {
+    width: 48,
+    height: 48,
+    opacity: 0.3,
   },
   choiceText: {
     fontSize: 16,

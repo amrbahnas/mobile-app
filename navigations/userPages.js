@@ -6,6 +6,10 @@ import DiagnosisStart from "../screens/Diagnosis_start/DiagnosisStart";
 import Questions from "../screens/Questions/Questions";
 import ResultPage from "../screens/Result-page/ResultPage";
 import LoadingPage from "../screens/Loading-page/LoadingPage";
+import ChooseTraining from "../screens/Choose-Training/ChooseTraining";
+import MaharaLevels from "../screens/Mahara-Levels/MaharaLevels";
+import Trainig from "../screens/Training/Training";
+import TrainingResult from "../screens/Training-result/TrainingResult";
 
 const UserPages = () => {
   const Stack = createNativeStackNavigator();
@@ -56,6 +60,34 @@ const UserPages = () => {
       <Stack.Screen
         name="loading-page"
         component={LoadingPage}
+        options={() => ({
+          headerShown: false,
+        })}
+      />
+      <Stack.Screen
+        name="choose-training"
+        component={ChooseTraining}
+        options={() => ({
+          headerShown: false,
+        })}
+      />
+      <Stack.Screen
+        name="mahara-levels"
+        component={MaharaLevels}
+        options={() => ({
+          headerShown: false,
+        })}
+      />
+      <Stack.Screen
+        name="trainig"
+        component={Trainig}
+        options={() => ({
+          headerShown: false,
+        })}
+      />
+      <Stack.Screen
+        name="training-result"
+        component={TrainingResult}
         options={() => ({
           headerShown: false,
         })}

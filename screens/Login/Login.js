@@ -81,7 +81,7 @@ export default Login = ({ navigation }) => {
         <Formik
           style={styles.formContainer}
           initialValues={{
-            email: "eng.elbahnsawy@gmail.com",
+            email: "elbahnsawy@gmail.com",
             password: "123123",
           }}
           validationSchema={loginSchema}

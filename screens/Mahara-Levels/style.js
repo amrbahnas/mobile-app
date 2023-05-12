@@ -14,36 +14,39 @@ export default styles = StyleSheet.create({
     marginTop: -50,
     gap: 100,
   },
+  header: {
+    width: "100%",
+    gap: 10,
+    flexDirection: "row",
+    alignItems: "center",
+    justifyContent: "center",
+  },
   title: {
     color: "black",
-    width: "100%",
-    textAlign: "center",
     fontSize: 22,
     fontWeight: "bold",
   },
   box: {
     width: "100%",
-    height: 300,
-    borderWidth: 1,
-    borderColor: "#95959580",
-    borderRadius: 5,
-    backgroundColor: "#fff",
+    height: 335,
     marginVertical: 10,
   },
-  row: {
+  level: {
     flex: 1,
     flexDirection: "row",
     alignItems: "center",
     justifyContent: "space-between",
-    padding: 20,
-    borderBottomWidth: 1,
-    borderBottomColor: "#95959580",
+    marginBottom: 10,
+    padding: 15,
+    borderRadius: 20,
+    backgroundColor: "#fff",
   },
-  rightContent: {
-    flex: 1,
-    flexDirection: "row",
-    alignItems: "center",
-    justifyContent: "flex-end",
+  disabled: {
+    opacity: 0.5,
+  },
+  selected: {
+    borderWidth: 2,
+    borderColor: "#14bbff",
   },
   text: {
     marginLeft: 10,
@@ -52,8 +55,8 @@ export default styles = StyleSheet.create({
   },
   icon: {
     marginLeft: 10,
-    width: 30,
-    height: 30,
+    width: 25,
+    height: 25,
   },
   button: {
     width: "100%",

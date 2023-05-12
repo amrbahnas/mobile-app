@@ -4,6 +4,7 @@ import {
 } from "@react-navigation/drawer";
 import UserPages from "./userPages";
 import DrawerContent from "../components/DrawerContent";
+import ProfilePage from "../screens/Profile/Profile";
 const UserNavigator = () => {
   const Drawer = createDrawerNavigator();
   return (
@@ -42,7 +43,13 @@ const UserNavigator = () => {
             // },
           }}
         />
-        {/* <Drawer.Screen name="signUp" component={() => {}} /> */}
+        <Drawer.Screen
+          name="profile"
+          component={ProfilePage}
+          options={{
+            title: "",
+          }}
+        />
       </Drawer.Navigator>
     </>
   );

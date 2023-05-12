@@ -1,16 +1,14 @@
 import { create } from "zustand";
 import AsyncStorage from "@react-native-async-storage/async-storage";
 import { persist, createJSONStorage } from "zustand/middleware";
-export default useStore = create(
+export default historyStore = create(
   persist(
     (set) => ({
-      login: false,
-      user: {},
-      setUser: (data) => set(() => ({ user: data })),
-      setLogin: (data) => set(() => ({ login: data })),
+      trainingHistory: {},
+      setTrainingHistory: (data) => set(() => ({ trainingHistory: data })),
     }),
     {
-      name: "user-info",
+      name: "training-history",
       storage: createJSONStorage(() => AsyncStorage),
     }
   )
