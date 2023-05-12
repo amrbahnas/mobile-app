@@ -29,9 +29,13 @@ const ChooseOperation = ({ navigation }) => {
   };
 
   const navigateHandler = () => {
-    navigation.navigate("choose-perception", {
-      title: perceptionTypeTitles[currentIndex],
-    });
+    if (currentIndex === 1) {
+      navigation.navigate("choose-training");
+    } else {
+      navigation.navigate("choose-perception", {
+        title: perceptionTypeTitles[currentIndex],
+      });
+    }
   };
 
   return (

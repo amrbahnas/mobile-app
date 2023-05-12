@@ -12,16 +12,16 @@ import { TextInput } from "react-native-paper";
 import { doc, updateDoc } from "firebase/firestore";
 import { db } from "../../firebase/firebase";
 import userInfo from "../../hooks/userInfo";
+import modelStore from "./../../hooks/model";
 const ProfilePage = () => {
-  const {
-    user: { email, name, age, gender, diagnosis, id },
-  } = userInfo();
+  const { setIsOpen } = modelStore();
+  const { user, setUser } = userInfo();
+  const { email, name, age, gender, id } = user;
   const [isEditing, setIsEditing] = useState(false);
   const [updatedName, setupdatedName] = useState(name);
   const [updatedEmail, setupdatedEmail] = useState(email);
   const [updatedGender, setUpdatedGender] = useState(gender);
   const [updatedAge, setUpdatedAge] = useState(age);
-  const [loading, setLoading] = useState(false);
   const updateProfile = async () => {
     if (
       updatedEmail === email &&
@@ -32,7 +32,7 @@ const ProfilePage = () => {
       setIsEditing(false);
       return;
     }
-    setLoading(true);
+    setIsOpen();
     const docRef = doc(db, "users", id);
     const newData = {
       name: updatedName,
@@ -41,7 +41,8 @@ const ProfilePage = () => {
       gender: updatedGender,
     };
     await updateDoc(docRef, newData).then(() => {
-      setLoading(false);
+      setIsOpen();
+      setUser({ ...user, ...newData });
       setIsEditing(false);
     });
   };

@@ -41,3 +41,23 @@ export default styles = StyleSheet.create({
 
   //  eas build -p android --profile preview
 // expo start --tunnel
+
+
+
+ const data= {
+  visual: {
+    finished :5,
+    result : [20,30],
+    total: 19,
+  },
+  auditory: {
+     finished :0,
+    result : [],
+    total: 19,
+  },
+  ear :{
+     finished :0,
+    result : [],
+    total: 19,
+  },
+ }

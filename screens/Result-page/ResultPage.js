@@ -89,10 +89,6 @@ const ResultPage = ({ navigation, route }) => {
   // [0-19.2, 19.2-34.4, 35-48, 49-80]
   // % [0-24, 24-43, 44-60, 61-100]
 
-  const nextHandler = () => {
-    navigation.navigate("Home");
-  };
-
   return (
     <View style={styles.container}>
       <Text style={styles.title}>
@@ -168,10 +164,20 @@ const ResultPage = ({ navigation, route }) => {
           )}
         </View>
       </View>
-
-      <TouchableOpacity style={styles.button} onPress={nextHandler}>
-        <Text style={styles.buttonText}>الاستمرار</Text>
-      </TouchableOpacity>
+      <View style={styles.buttonsContainer}>
+        <TouchableOpacity
+          style={styles.button}
+          onPress={() => navigation.navigate("choose-training")}
+        >
+          <Text style={styles.buttonText}>لنبدا التمرين</Text>
+        </TouchableOpacity>
+        <TouchableOpacity
+          style={[styles.secondButton]}
+          onPress={() => navigation.navigate("choose-operation")}
+        >
+          <Text style={[styles.secondButtonText]}>العودة لصفحة البداية</Text>
+        </TouchableOpacity>
+      </View>
     </View>
   );
 };

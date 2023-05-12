@@ -1,53 +1,33 @@
 import React, { useState, useEffect, useRef } from "react";
-import { View, Text, TouchableOpacity, ScrollView, Alert } from "react-native";
+import {
+  View,
+  Text,
+  TouchableOpacity,
+  ScrollView,
+  Alert,
+  Image,
+} from "react-native";
 import styles from "./style";
-import { data1, data2, data3, data4, data5, data6 } from "./data";
-import userInfo from "../../hooks/userInfo";
-const Questions = ({ navigation, route }) => {
-  // useEffect(() => {
-  //   const unsubscribe = navigation.addListener("beforeRemove", (event) => {
-  //     event?.preventDefault();
-  //     Alert.alert("Warning", "Are you sure you want to leave the exam?", [
-  //       {
-  //         text: "Stay",
-  //         style: "cancel",
-  //         onPress: () => console.log("Stay pressed"),
-  //       },
-  //       {
-  //         text: "Leave",
-  //         style: "destructive",
-  //         onPress: () => navigation.navigate("choose-operation"),
-  //       },
-  //     ]);
-  //   });
-  //   return unsubscribe;
-  // }, [navigation]);
-  const { selectedboxs } = route.params;
-  const {
-    user: { age },
-  } = userInfo();
-  // const age = 7;
-  const [questions, setquestions] = useState([]);
+
+const Trainig = ({ navigation, route }) => {
+  const { data } = route.params;
+  const scrollViewRef = useRef(null);
+  const questions = data?.map((item, indx) => ({
+    id: indx + 1,
+    text: item,
+    choices: ["جيد", "متوسط", "ضعيف"],
+    icons: [
+      require("../../assets/icons/emoji.png"),
+      require("../../assets/icons/smile.png"),
+      require("../../assets/icons/confused.png"),
+    ],
+    points: [2, 1, 0],
+  }));
+
   const [currentQuestionIndex, setCurrentQuestionIndex] = useState(0);
   const [answers, setAnswers] = useState([]);
   const [currentQuestionsAnswered, setCurrentQuestionsAnswered] =
     useState(false);
-  const scrollViewRef = useRef(null);
-
-  useEffect(() => {
-    const data = [];
-    if (parseInt(age) > 8) {
-      if (selectedboxs.includes("visual")) data.push(...data1);
-      if (selectedboxs.includes("audio")) data.push(...data2);
-      if (selectedboxs.includes("sensual")) data.push(...data3);
-    } else {
-      if (selectedboxs.includes("visual")) data.push(...data4);
-      if (selectedboxs.includes("audio")) data.push(...data5);
-      if (selectedboxs.includes("sensual")) data.push(...data6);
-    }
-    setquestions(data.map((item, index) => ({ ...item, id: index + 1 })));
-    setAnswers(Array(data.length).fill(null));
-  }, []);
 
   useEffect(() => {
     const startIndex = currentQuestionIndex * 3;
@@ -99,24 +79,16 @@ const Questions = ({ navigation, route }) => {
       return true;
     });
   };
-  console.log(age);
-  const renderQuestion = (question) => {
+  const renderQuestion = ({ id, text, choices, points, icons }) => {
     return (
-      <View key={question.id} style={styles.singleQuestion}>
-        <Text style={styles.questionText}>{question.text}</Text>
-        <View
-          style={[
-            styles.choices,
-            age > 8
-              ? { justifyContent: "space-between" }
-              : { justifyContent: "flex-end", gap: 60 },
-          ]}
-        >
-          {question.choices?.map((choice, index) => (
+      <View key={id} style={styles.singleQuestion}>
+        <Text style={styles.questionText}>{text}</Text>
+        <View style={[styles.choices]}>
+          {choices?.map((choice, index) => (
             <TouchableOpacity
               key={index}
               style={styles.choiceContainer}
-              onPress={() => handleAnswer(question.id, question.points[index])}
+              onPress={() => handleAnswer(id, points[index])}
             >
               <View
                 style={{
@@ -125,11 +97,13 @@ const Questions = ({ navigation, route }) => {
                 }}
               >
                 <Text style={styles.choiceText}>{choice}</Text>
-                <View style={styles.radioCircle}>
-                  {answers[question.id - 1] === question.points[index] && (
-                    <View style={styles.selectedRadioCircle} />
-                  )}
-                </View>
+                <Image
+                  style={[
+                    styles.choiceIcon,
+                    answers[id - 1] === points[index] ? { opacity: 1 } : null,
+                  ]}
+                  source={icons[index]}
+                />
               </View>
             </TouchableOpacity>
           ))}
@@ -181,7 +155,7 @@ const Questions = ({ navigation, route }) => {
             onPress={submitAnswers}
             disabled={!currentQuestionsAnswered}
           >
-            <Text style={styles.submitText}>تقديم</Text>
+            <Text style={styles.submitText}>انهاء</Text>
           </TouchableOpacity>
         )}
       </View>
@@ -189,36 +163,8 @@ const Questions = ({ navigation, route }) => {
   };
 
   const submitAnswers = () => {
-    if (!age || !selectedboxs || selectedboxs.length === 0) {
-      console.error("Invalid input: age and selectedboxs are required");
-      return;
-    }
-
-    const result = { visual: 0, audio: 0, sensual: 0 };
-    const sliceSize = parseInt(age) > 8 ? 10 : 0;
-
-    result[selectedboxs[0]] = answers
-      .slice(0, 10 + sliceSize)
-      .reduce((a, b) => a + b, 0);
-
-    if (selectedboxs.length >= 2) {
-      result[selectedboxs[1]] = answers
-        .slice(10 + sliceSize, 20 + sliceSize)
-        .reduce((a, b) => a + b, 0);
-    }
-
-    if (selectedboxs.length === 3) {
-      result[selectedboxs[2]] = answers
-        .slice(20 + sliceSize)
-        .reduce((a, b) => a + b, 0);
-    }
-
-    navigation.navigate("loading-page", {
-      text: "جاري تحليل بياناتك ومن ثمه إعداد البرنامج المناسب لطفلك",
-      target: "result-page",
-      result,
-      selectedboxs,
-    });
+    const result = answers.reduce((acc, curr) => acc + curr, 0);
+    navigation.navigate("training-result", { result: (result / 10) * 100 });
   };
 
   return (
@@ -232,4 +178,4 @@ const Questions = ({ navigation, route }) => {
   );
 };
 
-export default Questions;
+export default Trainig;
