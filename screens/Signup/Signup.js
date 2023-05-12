@@ -25,9 +25,11 @@ import { SignupSchema } from "../../utils/formSchema";
 // style
 import styles from "./style.js";
 import modelStore from "../../hooks/model";
+import historyStore from "./../../hooks/userHistory";
 
 export default Signup = ({ navigation }) => {
   const { setIsOpen } = modelStore();
+  const { setTrainingHistory } = historyStore();
   const [showPassword, setShowPassword] = useState(false);
   const [showRepeatPassword, setShowRepeatPassword] = useState(false);
   const [loading, setloading] = useState(false);
@@ -47,14 +49,35 @@ export default Signup = ({ navigation }) => {
       .then((userCredentials) => {
         const user = userCredentials.user;
         const userData = {
+          id: user.uid,
           name: values.name,
           email: values.email,
         };
         setDoc(doc(db, "users", user.uid), userData).then(() => {
-          setloading(false);
-          setIsOpen();
-          navigation.navigate("signup-continue", {
-            id: user.uid,
+          const data = {
+            visual: {
+              finished: 1,
+              result: [],
+              total: 19,
+            },
+            audio: {
+              finished: 1,
+              result: [],
+              total: 19,
+            },
+            sensual: {
+              finished: 1,
+              result: [],
+              total: 19,
+            },
+          };
+          setDoc(doc(db, "trainingHistory", user.uid), data).then(() => {
+            setTrainingHistory(data);
+            setloading(false);
+            setIsOpen();
+            navigation.navigate("signup-continue", {
+              id: user.uid,
+            });
           });
         });
       })

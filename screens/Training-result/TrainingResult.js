@@ -1,11 +1,58 @@
-import React, { useState } from "react";
+import React, { useEffect } from "react";
 import { View, Text, Image, StyleSheet, TouchableOpacity } from "react-native";
+import historyStore from "../../hooks/userHistory";
+import userInfo from "../../hooks/userInfo";
+// firebase
+import { doc, updateDoc } from "firebase/firestore";
+import { db } from "../../firebase/firebase";
 const TrainingResult = ({ navigation, route }) => {
-  const { result } = route.params;
+  const { trainingHistory, setTrainingHistory } = historyStore();
+  const {
+    user: { id },
+  } = userInfo();
+  const { result, selectedLevel } = route.params;
+  let level = selectedLevel;
+
+  useEffect(() => {
+    if (level === trainingHistory.visual.finished) {
+      const trainningResults = trainingHistory.visual.result;
+      trainningResults.push(result);
+      const newHistory = {
+        ...trainingHistory,
+        visual: {
+          ...trainingHistory.visual,
+          result: trainningResults,
+          finished: level + 1,
+        },
+      };
+      console.log(newHistory);
+      const docRef = doc(db, "trainingHistory", id);
+      updateDoc(docRef, newHistory).then(() => {
+        setTrainingHistory(newHistory);
+      });
+    } else {
+      const trainningResults = trainingHistory.visual.result;
+      trainningResults[level - 1] = result;
+      const newHistory = {
+        ...trainingHistory,
+        visual: {
+          ...trainingHistory.visual,
+          result: trainningResults,
+        },
+      };
+
+      console.log(newHistory);
+      const docRef = doc(db, "trainingHistory", id);
+      updateDoc(docRef, newHistory).then(() => {
+        setTrainingHistory(newHistory);
+      });
+    }
+  }, []);
+
   const image =
     result > 50
       ? require("../../assets/images/love.png")
-      : result < 50 && result > 35
+      : result <= 50 && result >= 35
       ? require("../../assets/images/happy.png")
       : require("../../assets/images/sad.png");
   const handleClick = () => {

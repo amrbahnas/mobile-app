@@ -10,7 +10,7 @@ import {
 import styles from "./style";
 
 const Trainig = ({ navigation, route }) => {
-  const { data } = route.params;
+  const { data, selectedLevel } = route.params;
   const scrollViewRef = useRef(null);
   const questions = data?.map((item, indx) => ({
     id: indx + 1,
@@ -164,7 +164,10 @@ const Trainig = ({ navigation, route }) => {
 
   const submitAnswers = () => {
     const result = answers.reduce((acc, curr) => acc + curr, 0);
-    navigation.navigate("training-result", { result: (result / 10) * 100 });
+    navigation.navigate("training-result", {
+      result: (result / 10) * 100,
+      selectedLevel,
+    });
   };
 
   return (

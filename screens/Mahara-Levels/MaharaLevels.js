@@ -6,23 +6,23 @@ import { data, sessions } from "./data";
 import historyStore from "../../hooks/userHistory";
 
 const MaharaLevels = ({ navigation, route }) => {
-  const { trainingHistory: visual } = historyStore();
+  const {
+    trainingHistory: { visual },
+  } = historyStore();
 
   const smallArrays = [];
 
   for (let i = 0; i < data.length; i += 5) {
-    if (i <= visual.finished * 5) {
-      smallArrays.push({ data: data.slice(i, i + 5), open: true });
-    } else {
-      smallArrays.push({ data: data.slice(i, i + 5), open: false });
-    }
+    const open = i < visual.finished * 5;
+    smallArrays.push({ data: data.slice(i, i + 5), open });
   }
-
-  const [selectedLevel, setSelectedLevel] = useState(visual?.finished + 1 || 1);
+  console.log(visual);
+  const [selectedLevel, setSelectedLevel] = useState(visual?.finished || 1);
 
   const nextHandler = () => {
     navigation.navigate("trainig", {
       data: smallArrays[selectedLevel - 1].data,
+      selectedLevel,
     });
 
     // if (selectedBox) {

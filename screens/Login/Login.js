@@ -39,7 +39,7 @@ export default Login = ({ navigation }) => {
         const docRef = doc(db, "users", user.uid);
         getDoc(docRef).then((doc) => {
           if (doc.data().age) {
-            setUser({ ...doc.data(), id: user.uid });
+            setUser(doc.data());
             setLoading(false);
             setIsOpen();
             setLogin(true);
@@ -81,7 +81,7 @@ export default Login = ({ navigation }) => {
         <Formik
           style={styles.formContainer}
           initialValues={{
-            email: "eng.elbahnsawy@gmail.com",
+            email: "elbahnsawy@gmail.com",
             password: "123123",
           }}
           validationSchema={loginSchema}
